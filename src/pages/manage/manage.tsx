@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { Table, TableConfig } from '../../components/table/table';
+import { Table, TableConfig } from '../../components';
 
 interface ManageProps {
 
@@ -9,7 +9,7 @@ interface ManageProps {
 export const Manage: FC<ManageProps> = (props: ManageProps) => {
     const tableConfig: TableConfig = {
         tableHeight: 400,
-        columnWidth: 200,
+        columnWidth: 100,
         headerData: [ '', 'symbol', 'shares', 'buy' ],
         data: [
             [ '1', '1', '2', '3' ],

@@ -1,8 +1,8 @@
 import React, { FC, ReactNode } from 'react';
-import cn from 'classnames';
+
+import { TableCell } from './table-cell/table-cell';
 
 import './table.scss';
-import { Icon } from '..';
 
 export interface TableConfig {
     columnWidth: number;
@@ -17,19 +17,7 @@ interface TableProps {
 
 export const Table: FC<TableProps> = (props: TableProps) => {
 
-    const checkBoxIcon: ReactNode = (
-        <>
-            <Icon iconPrefix='fas' icon='square-full'/>
-            <Icon iconPrefix='fas' icon='check-square'/>
-        </>
-    );
-
     const selectRow = (e: any) => {
-        console.log('div clicked');
-    };
-
-    const cellInlineStyle = {
-        width: props.tableConfig.columnWidth
     };
 
     const tableInlineStyles = {
@@ -40,14 +28,27 @@ export const Table: FC<TableProps> = (props: TableProps) => {
         return (
             <>
                 <div id='header-id' className='row header'>
-                    { props.tableConfig.headerData.map((headerData, index) => tableCell(headerData, index.toString())) }
+                    {
+                        props.tableConfig.headerData.map((headerData, index) =>
+                            <TableCell key={ index.toString() }
+                                       keyValue={ index.toString() }
+                                       row='header'
+                                       cellContent={ headerData }
+                                       tableConfig={ props.tableConfig }/>)
+                    }
                 </div>
                 <div id='content-id' className='content'>
                     {
                         props.tableConfig.data.map((data, index) => {
-                            return <div className='row' onClick={ selectRow } key={ index }
+                            return <div className='row' key={ index }
                                         id={ index.toString() }>
-                                { data.map((dataItem, index) => tableCell(dataItem, index.toString())) }
+                                { data.map((dataItem, index) =>
+                                    <TableCell key={ index.toString() }
+                                               keyValue={ index.toString() }
+                                               row='content'
+                                               checked={ true }
+                                               cellContent={ dataItem }
+                                               tableConfig={ props.tableConfig }/>) }
                             </div>;
                         })
                     }
@@ -55,12 +56,6 @@ export const Table: FC<TableProps> = (props: TableProps) => {
             </>
         );
     };
-
-    const tableCell = (cellContent: string, key: string): ReactNode =>
-        <div key={ key } className='cell' style={ cellInlineStyle }>
-            { parseInt(key) === 0 && checkBoxIcon }
-            { parseInt(key) !== 0 && <span key={ key } id={ key }>{ cellContent }</span> }
-        </div>;
 
     return <div id='scrolling' className='table' style={ tableInlineStyles }>{ tableRows() }</div>;
 };
