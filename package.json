@@ -45,7 +45,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!(react-i18next/hooks))/\"",
+    "test:coverage": "yarn test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -61,6 +62,30 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!node_modules/",
+      "!src/typings/**/*.*",
+      "!src/jest/**/*.*",
+      "!src/index.tsx",
+      "!src/**/index.ts",
+      "!src/common/api/entities/*.*",
+      "!src/common/enums/*.*",
+      "src/store/store.ts",
+      "!src/services/translation-service.ts",
+      "!src/services/elf-service.ts",
+      "!src/services/api-service.ts",
+      "!src/styles/**/*.*"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ]
   }
 }

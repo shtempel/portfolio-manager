@@ -4,8 +4,6 @@ import React, { FC } from 'react';
 import routes from './routes';
 import { appHistory } from './store/store';
 
-import './App.scss';
-
 const App: FC = () => {
     return (
         <div className='App'>

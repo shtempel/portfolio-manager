@@ -1,0 +1,26 @@
+@import './colors';
+
+@mixin column-direction {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin row-direction {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100px;
+}
+
+@mixin table-border {
+  border: 3px solid $_COLOR_ALUMINIUM;
+}
+
+@mixin row-border {
+  border: 1px solid $_COLOR_IRON;
+}
