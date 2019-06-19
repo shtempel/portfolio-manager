@@ -7,19 +7,17 @@ import './table.scss';
 export interface TableConfig {
     columnWidth: number;
     tableHeight: number;
-    headerData: string[];
-    data: string[][];
+    headerData: any[];
+    data: any[][];
 }
 
 interface TableProps {
     tableConfig: TableConfig;
+
+    selectSymbolRow(id: string): void;
 }
 
 export const Table: FC<TableProps> = (props: TableProps) => {
-
-    const selectRow = (e: any) => {
-    };
-
     const tableInlineStyles = {
         height: props.tableConfig.tableHeight
     };
@@ -32,7 +30,6 @@ export const Table: FC<TableProps> = (props: TableProps) => {
                         props.tableConfig.headerData.map((headerData, index) =>
                             <TableCell key={ index.toString() }
                                        keyValue={ index.toString() }
-                                       row='header'
                                        cellContent={ headerData }
                                        tableConfig={ props.tableConfig }/>)
                     }
@@ -40,15 +37,14 @@ export const Table: FC<TableProps> = (props: TableProps) => {
                 <div id='content-id' className='content'>
                     {
                         props.tableConfig.data.map((data, index) => {
-                            return <div className='row' key={ index }
-                                        id={ index.toString() }>
-                                { data.map((dataItem, index) =>
-                                    <TableCell key={ index.toString() }
-                                               keyValue={ index.toString() }
-                                               row='content'
-                                               checked={ true }
-                                               cellContent={ dataItem }
-                                               tableConfig={ props.tableConfig }/>) }
+                            return <div className='row' key={ index } id={ data[1] }>
+                                {
+                                    data.map((dataItem, index) =>
+                                        <TableCell key={ index.toString() }
+                                                   keyValue={ index.toString() }
+                                                   cellContent={ dataItem }
+                                                   tableConfig={ props.tableConfig }/>)
+                                }
                             </div>;
                         })
                     }

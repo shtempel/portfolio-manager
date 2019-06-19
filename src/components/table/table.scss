@@ -16,14 +16,16 @@
   @include row-direction;
 
   &:hover {
-    //background-image: linear-gradient(to bottom, rgba(238,118,0,0.15), rgba(238,118,0,0.15));
     background-color: #ecedf3;
+  }
+  i {
+    color: $_COLOR_MANATEE;
   }
 }
 
 .selected-row {
-  color: $_COLOR_MANGO_TANGO;
-  background-image: linear-gradient(to bottom, rgba(238, 118, 0, 0.15), rgba(238, 118, 0, 0.15));
+  color: $_COLOR_MANGO_TANGO!important;
+  background-image: linear-gradient(to bottom, rgba(238, 118, 0, 0.15), rgba(238, 118, 0, 0.15))!important;
 }
 
 .cell {
