@@ -19,6 +19,48 @@ const initialState: SymbolState = {
             description: 'asdasdasd',
             isChecked: false,
             shares: '43'
+        },
+        {
+            symbol: 'aapl',
+            buy: '200',
+            description: 'asdasdasd',
+            isChecked: false,
+            shares: '43'
+        },
+        {
+            symbol: 'aapl',
+            buy: '200',
+            description: 'asdasdasd',
+            isChecked: false,
+            shares: '43'
+        },
+        {
+            symbol: 'aapl',
+            buy: '200',
+            description: 'asdasdasd',
+            isChecked: false,
+            shares: '43'
+        },
+        {
+            symbol: 'aapl',
+            buy: '200',
+            description: 'asdasdasd',
+            isChecked: false,
+            shares: '43'
+        },
+        {
+            symbol: 'aapl',
+            buy: '200',
+            description: 'asdasdasd',
+            isChecked: false,
+            shares: '43'
+        },
+        {
+            symbol: 'aapl',
+            buy: '200',
+            description: 'asdasdasd',
+            isChecked: false,
+            shares: '43'
         }
     ]
 };

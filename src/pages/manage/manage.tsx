@@ -73,11 +73,12 @@ const Manage: FC<ManageProps> = (props: ManageProps) => {
     const tableConfig: TableConfig = {
         tableHeight: 200,
         columnWidth: 100,
+        isFooter: true,
         headerData: [ getAllCheckUncheckIcon(), 'symbol', 'shares', 'buy' ],
         data: [ ...data ]
     };
 
-    return <Table tableConfig={ tableConfig } selectSymbolRow={ selectSymbolRow }/>;
+    return <Table tableConfig={ tableConfig } />;
 };
 
 export default connect(

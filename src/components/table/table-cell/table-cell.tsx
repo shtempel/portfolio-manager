@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 
 import { TableConfig } from '../table';
 
@@ -10,8 +10,7 @@ interface ColumnProps {
 
 export const TableCell: FC<ColumnProps> = (props: ColumnProps) => {
     const { keyValue, cellContent, tableConfig } = props;
-
-    const cellInlineStyle = {
+    const cellInlineStyle: CSSProperties = {
         width: parseInt(keyValue) === 0 ? 24 : tableConfig.columnWidth
     };
 
