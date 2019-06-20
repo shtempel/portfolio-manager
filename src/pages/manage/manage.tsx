@@ -3,8 +3,8 @@ import React, { FC, ReactNode } from 'react';
 import { connect } from 'react-redux';
 import { IconName } from '@fortawesome/fontawesome-common-types';
 
-import { Icon, Table, TableConfig } from '../../components';
-import { deselectAllRows, selectAllRows, selectSymbolRow } from '../../store/symbol/actions';
+import { Button, Icon, Table, TableConfig } from '../../components';
+import { deleteRows, deselectAllRows, selectAllRows, selectSymbolRow } from '../../store/symbol/actions';
 import { selectIsSomeRowsSelected, selectPortfolio, selectSelectedRows } from '../../store/symbol/selectors';
 import { PortfolioSymbolItem } from '../../store/symbol/typings';
 import { AppState } from '../../store/typings';
@@ -17,6 +17,7 @@ interface ManageProps {
     selectSymbolRow(id: string): void;
     selectAllRows(): void;
     deselectAllRows(): void;
+    deleteRows(): void;
 }
 
 const mapStateToProps = (state: AppState) => ({
@@ -25,10 +26,10 @@ const mapStateToProps = (state: AppState) => ({
     selectedRows: selectSelectedRows(state)
 });
 
-const mapDispatchToProps = { selectSymbolRow, selectAllRows, deselectAllRows };
+const mapDispatchToProps = { selectSymbolRow, selectAllRows, deselectAllRows, deleteRows };
 
 const Manage: FC<ManageProps> = (props: ManageProps) => {
-    const { isSomeRowsSelected, deselectAllRows, selectAllRows, selectSymbolRow, portfolio, selectedRows } = props;
+    const { isSomeRowsSelected, deselectAllRows, selectAllRows, selectSymbolRow, portfolio, selectedRows, deleteRows } = props;
     const selectDeselect = () => {
         if (!selectedRows || isSomeRowsSelected) {
             selectAllRows();
@@ -39,7 +40,7 @@ const Manage: FC<ManageProps> = (props: ManageProps) => {
         }
     };
 
-    const getAllCheckUncheckIcon = (): ReactNode => {
+    const getSelectAllRowsIcon = (): ReactNode => {
         let iconType: IconName = 'square';
         if (isSomeRowsSelected) {
             iconType = 'minus-square';
@@ -57,28 +58,35 @@ const Manage: FC<ManageProps> = (props: ManageProps) => {
         )
     };
 
-    const getCheckedIcon = (checked: boolean, id: string): ReactNode =>
+    const getSelectRowIcon = (checked: boolean, id: string): ReactNode =>
         <Icon className={ cn('', { 'selected-row': checked }) }
               iconPrefix='fas'
               onIconClick={ () => {selectSymbolRow(id)} }
               icon={ checked ? 'check-square' : 'square' }/>;
 
     const data: any[][] = portfolio.map(item => [
-        getCheckedIcon(item.isChecked, item.symbol),
+        getSelectRowIcon(item.isChecked, item.symbol),
         item.symbol,
         item.buy,
         item.shares
     ]);
 
+    const deleteSelectedRows = () => isSomeRowsSelected && deleteRows();
+    const trashButton: ReactNode = <Button onButtonClick={ deleteSelectedRows }
+                                           disabled={ !isSomeRowsSelected }
+                                           icon={ { iconName: 'trash', iconPrefix: 'fas' } }/>;
+    const footerData = [ trashButton ];
+
     const tableConfig: TableConfig = {
         tableHeight: 200,
         columnWidth: 100,
+        footerData: [ ...footerData ],
         isFooter: true,
-        headerData: [ getAllCheckUncheckIcon(), 'symbol', 'shares', 'buy' ],
+        headerData: [ getSelectAllRowsIcon(), 'symbol', 'shares', 'buy' ],
         data: [ ...data ]
     };
 
-    return <Table tableConfig={ tableConfig } />;
+    return <><Table tableConfig={ tableConfig }/></>;
 };
 
 export default connect(

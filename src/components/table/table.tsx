@@ -8,6 +8,7 @@ export interface TableConfig {
     columnWidth: number;
     tableHeight: number;
     headerData: any[];
+    footerData: any[];
     data: any[][];
     isHeader?: boolean;
     isFooter?: boolean;
@@ -19,7 +20,7 @@ interface TableProps {
 
 export const Table: FC<TableProps> = (props: TableProps) => {
     const { tableConfig } = props;
-    const { isHeader = true, isFooter, data, tableHeight, headerData } = tableConfig;
+    const { isHeader = true, isFooter, data, tableHeight, headerData, footerData } = tableConfig;
     const getContentHeight = () => {
         if (isHeader && isFooter) {
             return '80%'
@@ -68,7 +69,13 @@ export const Table: FC<TableProps> = (props: TableProps) => {
                 }
             </div>
         );
-        const footer: ReactNode = isFooter && (<div className='footer'>footer</div>);
+        const footer: ReactNode = isFooter && (
+            <div className='footer'>
+                {
+                    footerData.map(footerItem => footerItem)
+                }
+            </div>
+        );
 
         return (
             <>

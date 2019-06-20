@@ -1,5 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { IconName } from '@fortawesome/fontawesome-common-types';
+import cn from 'classnames';
+
+import './icon.scss';
 
 export type IconPrefix = | 'fa' | 'fas' | 'far';
 
@@ -9,19 +12,22 @@ interface IconProps {
     title?: string;
     icon: IconName;
     iconPrefix: IconPrefix;
-    onIconClick?: any;
+    disabled?: boolean;
+    name?: string;
     size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-larger';
+
+    onIconClick?(): void;
 }
 
-export const Icon: FunctionComponent<IconProps> = (props: IconProps) => {
+export const Icon: FC<IconProps> = (props: IconProps) => {
     const iconSize = {
         fontSize: props.size
     };
+
     return (
-        <i className={ `${ props.className }  ${ props.iconPrefix } fa-${ props.icon }` }
+        <i className={ `${ cn(props.className, { 'disabled': props.disabled }) } ${ props.iconPrefix } fa-${ props.icon }` }
            style={ iconSize }
            title={ props.title }
            id={ props.id }
-           onClick={ props.onIconClick }/>
-    );
+           onClick={ props.onIconClick }>{ props.name }</i>)
 };

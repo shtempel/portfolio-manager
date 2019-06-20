@@ -8,3 +8,5 @@ export const selectSymbolRow = createAction(
 export const selectAllRows = createAction('SELECT_ALL_ROWS');
 
 export const deselectAllRows = createAction('DESELECT_ALL_ROWS');
+
+export const deleteRows = createAction('DELETE_ROWS');

@@ -19,48 +19,6 @@ const initialState: SymbolState = {
             description: 'asdasdasd',
             isChecked: false,
             shares: '43'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            isChecked: false,
-            shares: '43'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            isChecked: false,
-            shares: '43'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            isChecked: false,
-            shares: '43'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            isChecked: false,
-            shares: '43'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            isChecked: false,
-            shares: '43'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            isChecked: false,
-            shares: '43'
         }
     ]
 };
@@ -107,6 +65,13 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
                         isChecked: false
                     }
                 })
+            }
+        }
+
+        case getType(actions.deleteRows): {
+            return {
+                ...state,
+                portfolio: state.portfolio.filter( item => !item.isChecked)
             }
         }
 

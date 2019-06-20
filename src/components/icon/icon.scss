@@ -1,0 +1,7 @@
+@import'./../../styles/variables';
+
+.disabled {
+  cursor: default!important;
+  border: none!important;
+  color: $_COLOR_IRON!important;
+}
