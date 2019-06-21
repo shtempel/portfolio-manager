@@ -11,6 +11,8 @@
 }
 
 .cell {
+  display: flex;
+  justify-content: center;
   padding: 5px;
   box-sizing: border-box;
   border-right: 1px solid $_COLOR_IRON;

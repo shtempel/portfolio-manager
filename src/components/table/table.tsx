@@ -8,7 +8,7 @@ export interface TableConfig {
     columnWidth: number;
     tableHeight: number;
     headerData: any[];
-    footerData: any[];
+    footerData?: any[];
     data: any[][];
     isHeader?: boolean;
     isFooter?: boolean;
@@ -61,6 +61,7 @@ export const Table: FC<TableProps> = (props: TableProps) => {
                                 data.map((dataItem, index) =>
                                     <TableCell key={ index.toString() }
                                                keyValue={ index.toString() }
+                                               cellContentAlign={ index === 1 ? 'start' : 'end' }
                                                cellContent={ dataItem }
                                                tableConfig={ tableConfig }/>)
                             }
@@ -72,7 +73,7 @@ export const Table: FC<TableProps> = (props: TableProps) => {
         const footer: ReactNode = isFooter && (
             <div className='footer'>
                 {
-                    footerData.map(footerItem => footerItem)
+                    footerData && footerData.map(footerItem => footerItem)
                 }
             </div>
         );

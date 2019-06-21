@@ -9,4 +9,7 @@ export const selectAllRows = createAction('SELECT_ALL_ROWS');
 
 export const deselectAllRows = createAction('DESELECT_ALL_ROWS');
 
-export const deleteRows = createAction('DELETE_ROWS');
+export const deleteRow = createAction(
+    'DELETE_ROW',
+    resolve => (id: string) => resolve(id)
+);

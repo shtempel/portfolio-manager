@@ -16,7 +16,7 @@ interface IconProps {
     name?: string;
     size?: 'x-small' | 'small' | 'medium' | 'large' | 'x-large' | 'xx-larger';
 
-    onIconClick?(): void;
+    onIconClick?(args?: any): void;
 }
 
 export const Icon: FC<IconProps> = (props: IconProps) => {

@@ -68,10 +68,10 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             }
         }
 
-        case getType(actions.deleteRows): {
+        case getType(actions.deleteRow): {
             return {
                 ...state,
-                portfolio: state.portfolio.filter( item => !item.isChecked)
+                portfolio: state.portfolio.filter(item => item.symbol !== action.payload)
             }
         }
 
