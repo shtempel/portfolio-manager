@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import { IconName } from '@fortawesome/fontawesome-common-types';
 import cn from 'classnames';
 
