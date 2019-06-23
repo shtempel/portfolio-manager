@@ -13,6 +13,7 @@ interface ButtonProps {
     customClass?: string;
     id?: string;
     disabled?: boolean;
+    active?: boolean;
     buttonType?: ButtonType;
     icon?: { iconName: IconName, iconPrefix: IconPrefix };
 
@@ -31,7 +32,7 @@ export const Button: FC<ButtonProps> = (props: ButtonProps) => {
                 name={ name }
                 iconPrefix={ icon.iconPrefix }/>
         : <button type={ buttonType }
-                  className={ `button ${ customClass }` }
+                  className={ cn(`button ${ customClass }`, { 'active-button': props.active }) }
                   disabled={ disabled }
                   id={ id }
                   onClick={ onButtonClick }>{ name }</button>;

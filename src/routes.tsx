@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 
 import * as pages from './pages/index';
 
@@ -11,9 +11,10 @@ export const ROUTES = {
 const routes = (
     <div className='router'>
         <Switch>
-            <Route exact path='/' component={ pages.Manage }/>
-            <Route path={ ROUTES.manage } component={ pages.Manage }/>
-            <Route path={ ROUTES.monitor } component={ pages.Monitor }/>
+            <Route    exact path={ ROUTES.manage } component={ pages.Manage }/>
+            <Route    path={ ROUTES.manage }       component={ pages.Manage }/>
+            <Route    path={ ROUTES.monitor }      component={ pages.Monitor }/>
+            <Redirect to={ ROUTES.manage }/>
         </Switch>
     </div>
 );

@@ -5,7 +5,7 @@ import { SymbolState } from './typings';
 import * as actions from './actions';
 
 const initialState: SymbolState = {
-    portfolio: [
+    pendingSymbols: [
         {
             symbol: 'msft',
             buy: '100',
@@ -20,7 +20,8 @@ const initialState: SymbolState = {
             isChecked: false,
             shares: '43'
         }
-    ]
+    ],
+    portfolio: []
 };
 
 export type SymbolAction = ActionType<typeof actions>;
@@ -68,10 +69,10 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             }
         }
 
-        case getType(actions.deleteRow): {
+        case getType(actions.deletePendingSymbol): {
             return {
                 ...state,
-                portfolio: state.portfolio.filter(item => item.symbol !== action.payload)
+                pendingSymbols: state.pendingSymbols.filter(item => item.symbol !== action.payload)
             }
         }
 

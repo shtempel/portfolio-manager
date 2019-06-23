@@ -2,38 +2,38 @@ import React, { FC, ReactNode } from 'react';
 import { connect } from 'react-redux';
 
 import { Button, Table, TableConfig } from '../../components';
-import { deleteRow } from '../../store/symbol/actions';
-import { selectIsSomeRowsSelected, selectPortfolio, selectSelectedRows } from '../../store/symbol/selectors';
+import { deletePendingSymbol } from '../../store/symbol/actions';
+import { selectIsSomeRowsSelected, selectPendingSymbols, selectSelectedRows } from '../../store/symbol/selectors';
 import { PortfolioSymbolItem } from '../../store/symbol/typings';
 import { AppState } from '../../store/typings';
 
 interface ManageTableProps {
     isSomeRowsSelected: boolean;
     selectedRows: number;
-    portfolio: PortfolioSymbolItem[];
+    pendingSymbols: PortfolioSymbolItem[];
 
-    deleteRow(id: string): void;
+    deletePendingSymbol(id: string): void;
 }
 
 const mapStateToProps = (state: AppState) => ({
-    portfolio: selectPortfolio(state),
+    pendingSymbols: selectPendingSymbols(state),
     isSomeRowsSelected: selectIsSomeRowsSelected(state),
     selectedRows: selectSelectedRows(state)
 });
 
-const mapDispatchToProps = { deleteRow };
+const mapDispatchToProps = { deletePendingSymbol };
 
 const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
-    const { portfolio, deleteRow } = props;
+    const { pendingSymbols, deletePendingSymbol } = props;
 
     const getFirstColumn = (id: string): ReactNode =>
         <Button onButtonClick={ onDeleteRow } id={ id } icon={ { iconPrefix: 'fas', iconName: 'trash' } }/>;
 
-    const onDeleteRow = (e: any) => deleteRow(e.target.id);
+    const onDeleteRow = (e: any) => deletePendingSymbol(e.target.id);
 
     const settingsButton: ReactNode = <Button icon={ { iconPrefix: 'fas', iconName: 'cog' } }/>;
 
-    const data: any[][] = portfolio.map(item => [
+    const data: any[][] = pendingSymbols.map(item => [
         getFirstColumn(item.symbol),
         item.symbol,
         item.buy,
@@ -42,9 +42,9 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
 
     const tableConfig: TableConfig = {
         tableHeight: 200,
-        columnWidth: 100,
-        headerData: [ settingsButton, 'symbol', 'shares', 'buy' ],
-        data: [ ...data ]
+        columnWidth: 400,
+        headerData: [settingsButton, 'symbol', 'shares', 'buy'],
+        data: [...data]
     };
 
     return <Table tableConfig={ tableConfig }/>

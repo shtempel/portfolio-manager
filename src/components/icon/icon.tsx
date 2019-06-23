@@ -29,5 +29,5 @@ export const Icon: FC<IconProps> = (props: IconProps) => {
            style={ iconSize }
            title={ props.title }
            id={ props.id }
-           onClick={ props.onIconClick }>{ props.name }</i>)
+           onClick={ props.onIconClick }><span>{ props.name }</span></i>)
 };

@@ -1,0 +1,15 @@
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+
+  .nav-btn {
+    border: none;
+  }
+  i {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+
+}

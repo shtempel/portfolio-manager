@@ -39,9 +39,13 @@ export const Table: FC<TableProps> = (props: TableProps) => {
         height: getContentHeight()
     };
 
+    const headerStyles = {
+        height: isFooter ? '10%' : '20%'
+    };
+
     const tableRows = (): ReactNode => {
         const header: ReactNode = isHeader && (
-            <div id='header-id' className='row header'>
+            <div id='header-id' className='row header' style={ headerStyles }>
                 {
                     headerData.map((headerData, index) =>
                         <TableCell key={ index.toString() }
