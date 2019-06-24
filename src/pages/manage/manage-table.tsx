@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
@@ -29,13 +29,14 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
             buy: symbol.buy
         }
     });
+
     const config: TableConfig = {
-        data: [ ...symbols ],
+        data: [...symbols],
         columns: [
             { Header: t('table.symbol'), accessor: 'symbol', width: 400, headerClassName: 'header' },
-            { Header: t('table.shares'), accessor: 'shares', minWidth: 100, headerClassName: 'header' },
-            { Header: t('table.buy'), accessor: 'buy', minWidth: 50, headerClassName: 'header' },
-            { Header: '' }
+            { Header: t('table.shares'), accessor: 'shares', width: 150, headerClassName: 'header' },
+            { Header: t('table.buy'), accessor: 'buy', width: 150, headerClassName: 'header' },
+            { Header: '' },
         ],
         height: 300
     };
