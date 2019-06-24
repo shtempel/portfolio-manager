@@ -1,15 +1,19 @@
+@import './../../styles/variables';
+
 .nav-bar {
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  margin-bottom: 20px;
 
   .nav-btn {
-    border: none;
+    padding: 3px 15px;
+    border: 1px solid $_COLOR_ALUMINIUM;
+    background-color: #fafbfc;
   }
+
   i {
     display: flex;
     flex-direction: row-reverse;
+
   }
-
-
 }

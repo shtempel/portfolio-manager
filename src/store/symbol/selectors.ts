@@ -13,12 +13,3 @@ export const selectPendingSymbols = createSelector(
     [ slice ],
     state => state.pendingSymbols
 );
-
-export const selectIsSomeRowsSelected = createSelector(
-    [ selectPortfolio ],
-    selectPortfolio => selectPortfolio.some(symbol => symbol.isChecked));
-
-export const selectSelectedRows = createSelector(
-    [ selectPortfolio ],
-    selectPortfolio => selectPortfolio.filter(symbol => symbol.isChecked ).length
-);

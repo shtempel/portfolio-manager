@@ -3,12 +3,13 @@ import React, { FC } from 'react';
 
 import routes from './routes';
 import { appHistory } from './store/store';
-import { NavBar } from './components';
+import { NavBar, Header } from './components';
 
 const App: FC = () => {
     return (
-        <div className='App'>
-            <NavBar />
+        <div className='app'>
+            <Header/>
+            <NavBar/>
             <ConnectedRouter history={ appHistory }>{ routes }</ConnectedRouter>
         </div>
     );

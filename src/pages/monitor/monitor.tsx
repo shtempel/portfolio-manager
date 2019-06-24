@@ -1,11 +1,5 @@
 import React, { FC } from 'react';
 
-interface MonitorProps {
+import MonitorTable  from './monitor-table';
 
-}
-
-export const Monitor: FC<MonitorProps> = (props: MonitorProps) => {
-    return (
-        <div>Monitor</div>
-    );
-};
+export const Monitor: FC = () => <MonitorTable/>;
