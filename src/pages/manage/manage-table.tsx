@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
-import { Table, TableConfig, TotalRow } from '../../components';
+import { Table, TableConfig, TableFooter } from '../../components';
 import { deletePendingSymbol } from '../../store/symbol/actions';
 import { selectPendingSymbols } from '../../store/symbol/selectors';
 import { PendingSymbolItem } from '../../store/symbol/typings';
@@ -27,7 +27,14 @@ const mapDispatchToProps = { deletePendingSymbol };
 const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
     const { t } = useTranslation();
     const { pendingSymbols, deletePendingSymbol } = props;
-
+    const footerStyle: CSSProperties = {
+        height: '10%',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        fontSize: '14px',
+        color: '#8A8A96',
+        backgroundColor: '#FAFBFC'
+    };
     const symbols = pendingSymbols.map((symbol: PendingSymbolItem) => {
         return {
             symbol: <SymbolCell symbol={ symbol } deletePendingSymbol={ deletePendingSymbol }/>,
@@ -41,9 +48,10 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
         columns: [
             {
                 Header: t('table.symbol'),
+                Footer: <span style={ footerStyle }>{ t('tableFooter.total') }</span>,
+                headerClassName: 'header',
                 accessor: 'symbol',
                 width: 400,
-                headerClassName: 'header',
                 className: 'symbol-cell'
             },
             { Header: t('table.shares'), accessor: 'shares', width: 150, headerClassName: 'header' },
@@ -53,10 +61,12 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
         height: 300
     };
 
-    return <>
-        <Table config={ config }/>
-        <TotalRow/>
-    </>
+    return (
+        <>
+            <Table config={ config }/>
+            <TableFooter/>
+        </>
+    )
 };
 
 export default connect(

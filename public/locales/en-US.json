@@ -12,5 +12,11 @@
     "buy": "Buy",
     "current": "Current",
     "total": "Total"
+  },
+  "search": {
+    "placeholder": "Please enter symbol..."
+  },
+  "tableFooter": {
+    "total": "Total"
   }
 }
