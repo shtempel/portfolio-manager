@@ -1,15 +1,13 @@
 import { createAction } from 'typesafe-actions';
 
-export const selectSymbolRow = createAction(
-    'SELECT_SYMBOL_ROW',
-    resolve => (name: string) => resolve(name)
-);
-
-export const selectAllRows = createAction('SELECT_ALL_ROWS');
-
-export const deselectAllRows = createAction('DESELECT_ALL_ROWS');
+import { PendingSymbolItem } from './typings';
 
 export const deletePendingSymbol = createAction(
     'DELETE_PENDING_SYMBOL',
     resolve => (id: string) => resolve(id)
+);
+
+export const addPendingSymbolToPortfolio = createAction(
+    'ADD_PENDING_SYMBOL_TO_PORTFOLIO',
+    resolve => (symbol: PendingSymbolItem) => resolve(symbol)
 );

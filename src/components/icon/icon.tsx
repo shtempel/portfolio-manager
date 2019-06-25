@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { CSSProperties, FC } from 'react';
 import { IconName } from '@fortawesome/fontawesome-common-types';
 import cn from 'classnames';
 
@@ -20,7 +20,7 @@ interface IconProps {
 }
 
 export const Icon: FC<IconProps> = (props: IconProps) => {
-    const iconSize = {
+    const iconSize: CSSProperties = {
         fontSize: props.size
     };
 

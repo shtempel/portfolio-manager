@@ -1,5 +1,29 @@
-@import './../../styles/variables';
+@import './../../styles/index';
 
-.table-cell {
+.symbol-cell {
+  justify-content: space-between;
   @include row-direction;
+
+  .buttons-row {
+    i {
+      visibility: hidden;
+    }
+
+    i:first-child {
+      margin-right: 20px;
+    }
+  }
+}
+
+.symbol-cell:hover {
+  i {
+    visibility: visible;
+  }
+}
+
+.total-row {
+  width: 100%;
+  margin-top: -1px;
+  border: 1px solid $_COLOR_ALUMINIUM;
+  box-sizing: border-box;
 }
