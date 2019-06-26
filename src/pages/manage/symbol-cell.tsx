@@ -7,6 +7,7 @@ interface CustomCellProps {
     symbol: PendingSymbolItem;
 
     deletePendingSymbol(id: string): void;
+    fetchSymbol(id: string): void;
 }
 
 export const SymbolCell: FC<CustomCellProps> = (props: CustomCellProps) => {
@@ -15,7 +16,7 @@ export const SymbolCell: FC<CustomCellProps> = (props: CustomCellProps) => {
             { props.symbol.symbol }
             <div className='buttons-row'>
                 <Button id={ props.symbol.symbol }
-                        onButtonClick={ (e) => console.log(e.target.id) }
+                        onButtonClick={ (e) => props.fetchSymbol(e.target.id) }
                         icon={ { iconPrefix: 'fas', iconName: 'briefcase' } }/>
                 <Button id={ props.symbol.symbol }
                         onButtonClick={ (e) => props.deletePendingSymbol(e.target.id) }

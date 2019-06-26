@@ -18,3 +18,16 @@ export interface PendingSymbolItem {
     shares: string;
     buy: string;
 }
+
+export enum Interval {
+    one = '1min',
+    five = '5min',
+    fifteen = '15min',
+    thirty = '30min',
+    sixty = '60min'
+}
+
+export enum RequestFunction {
+    SymbolSearch = 'SYMBOL_SEARCH',
+    Intraday = 'TIME_SERIES_INTRADAY'
+}

@@ -2,8 +2,9 @@ import { all, put, take } from 'redux-saga/effects';
 import { getType } from 'typesafe-actions';
 
 import { rehydrateStateDone, rehydrateState } from './saved-state/actions';
-import saveStateSagas from './saved-state/sagas';
+import {saveStateSagas} from './saved-state/sagas';
 import { init } from './actions';
+import { symbolSagas } from './symbol/sagas';
 
 /**
  * Rehydrate store
@@ -23,8 +24,9 @@ export function* watchInitDone() {
 
 export default function* rootSaga() {
     yield all([
-        saveStateSagas(),
         watchInit(),
-        watchInitDone()
+        watchInitDone(),
+        ...saveStateSagas,
+        ...symbolSagas
     ]);
 }

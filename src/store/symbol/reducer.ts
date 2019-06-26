@@ -25,32 +25,7 @@ const initialState: SymbolState = {
             shares: '43'
         }
     ],
-    portfolio: [
-        {
-            name: 'msft',
-            lastRefreshed: '1263123',
-            currentValue: '123',
-            history: [],
-            shares: '412',
-            buy: '123'
-        },
-        {
-            name: 'goog',
-            lastRefreshed: '1263123',
-            currentValue: '123',
-            history: [],
-            shares: '412',
-            buy: '123'
-        },
-        {
-            name: 'aapl',
-            lastRefreshed: '1263123',
-            currentValue: '123',
-            history: [],
-            shares: '412',
-            buy: '123'
-        },
-    ]
+    portfolio: []
 };
 
 export type SymbolAction = ActionType<typeof actions>;
@@ -65,6 +40,15 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             }
         }
 
+        case getType(actions.fetchSymbolSuccess): {
+            return {
+                ...state,
+                portfolio: [
+                    ...state.portfolio,
+                    action.payload
+                ]
+            }
+        }
         default: {
             return state;
         }

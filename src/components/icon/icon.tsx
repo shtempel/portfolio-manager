@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import './icon.scss';
 
-export type IconPrefix = | 'fa' | 'fas' | 'far';
+export type IconPrefix = | 'fa' | 'fas' | 'far' | 'fab';
 
 interface IconProps {
     className?: string;

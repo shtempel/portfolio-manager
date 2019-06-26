@@ -11,8 +11,12 @@
     font-weight: bold;
     font-size: 14px;
     color: $_COLOR_MANATEE;
-    background-color: $_COLOR_ATHENS_GRAY!important;
+    background-color: $_COLOR_ATHENS_GRAY !important;
     @include row-direction;
+  }
+
+  .header:not(:first-child) {
+    justify-content: center;
   }
 
   .row {

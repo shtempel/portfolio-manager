@@ -1,20 +1,14 @@
-import {
-    all,
-    call,
-    put,
-    select,
-    takeEvery,
-    throttle
-} from 'redux-saga/effects';
+import { call, put, select, takeEvery, throttle } from 'redux-saga/effects';
 import { LOCATION_CHANGE, push } from "connected-react-router";
-import { getType } from 'typesafe-actions';
 import { AppSavedState } from '../typings';
+import { getType } from 'typesafe-actions';
+
 import { selectSavedState } from './selectors';
 import * as actions from './actions';
 import { localStorageService } from '../../services';
 import { setLanguage } from '../language/actions';
 
-export const saveStateActions: string[] = [
+const saveStateActions: string[] = [
     LOCATION_CHANGE,
     getType(setLanguage)
 ];
@@ -24,11 +18,11 @@ const STATE_KEY = 'PORTFOLIO';
 
 // Restore state
 
-export function* watchRehydrateState() {
+function* watchRehydrateState() {
     yield takeEvery(getType(actions.rehydrateState), rehydrateState);
 }
 
-export function* rehydrateState() {
+function* rehydrateState() {
     const state: AppSavedState = yield call(fetchState);
 
     if (state) {
@@ -45,18 +39,19 @@ const fetchState = () => localStorageService.getItem(STATE_KEY);
 
 // Saving state
 
-export function* watchSaveState() {
+function* watchSaveState() {
     yield throttle(SAVE_STATE_THROTTLE, saveStateActions, saveState);
 }
 
 export function* saveState() {
     const savedState = yield select(selectSavedState);
 
-    yield call([localStorageService, localStorageService.setItem],
+    yield call([ localStorageService, localStorageService.setItem ],
         STATE_KEY,
         savedState)
 }
 
-export default function* saveStateAppSagas() {
-    yield all([watchSaveState(), watchRehydrateState()]);
-}
+export const saveStateSagas = [
+    watchSaveState(),
+    watchRehydrateState()
+];
