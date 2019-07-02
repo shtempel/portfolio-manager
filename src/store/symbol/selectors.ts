@@ -11,6 +11,10 @@ export const selectPortfolio = createSelector(
     state => state.portfolio
 );
 
+export const selectIsPortfolioAvailable = createSelector(
+    [ selectPortfolio ],
+    portfolio => portfolio.length > 0
+);
 // Pending
 export const selectPendingSymbols = createSelector(
     [ slice ],

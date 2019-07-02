@@ -1,6 +1,7 @@
 export interface SymbolState {
     portfolio: PortfolioSymbolItem[];
     pendingSymbols: PendingSymbolItem[];
+    isLoading: boolean;
 }
 
 export interface PortfolioSymbolItem {
@@ -18,6 +19,8 @@ export interface PendingSymbolItem {
     shares: string;
     buy: string;
 }
+
+export type SearchSymbolsInterval = '1min' | '5min' | '15min' | '30min' | '60min';
 
 export enum Interval {
     one = '1min',

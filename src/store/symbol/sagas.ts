@@ -15,7 +15,7 @@ function* fetchSymbol(action: ReturnType<typeof actions.fetchSymbol>) {
     try {
         const fetchedSymbol = yield call(symbolService.getSymbol, action.payload);
         yield put(actions.fetchSymbolSuccess(symbolPortfolioMapper(fetchedSymbol, '1', '2')));
-    } catch (error) {
+    } catch ( error ) {
         yield put(actions.fetchSymbolFail(error));
         console.log(error)
     }

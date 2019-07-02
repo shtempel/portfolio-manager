@@ -7,23 +7,26 @@ import { Button } from '..';
 import { AppState } from '../../store/typings';
 import { selectCurrentPath } from '../../store/router/selectors';
 import { ROUTES } from '../../routes';
+import { selectIsPortfolioAvailable } from '../../store/symbol/selectors';
 
 import './nav-bar.scss';
 
 interface NavBarProps {
     currentPath: string;
+    isPortfolioAvailable: boolean;
 
     push(path: string): void;
 }
 
 const mapStateToProps = (state: AppState) => ({
-    currentPath: selectCurrentPath(state)
+    currentPath: selectCurrentPath(state),
+    isPortfolioAvailable: selectIsPortfolioAvailable(state)
 });
 
 const mapDispatchToProps = { push };
 
 const NavBar: FC<NavBarProps> = (props: NavBarProps) => {
-    const { currentPath, push } = props;
+    const { currentPath, push, isPortfolioAvailable } = props;
     const { t } = useTranslation();
 
     const toManage = () => currentPath !== ROUTES.manage && push(ROUTES.manage);
@@ -36,6 +39,7 @@ const NavBar: FC<NavBarProps> = (props: NavBarProps) => {
                     name={ t('navBar.manage') }
                     onButtonClick={ toManage }/>
             <Button customClass='nav-btn'
+                    disabled={ !isPortfolioAvailable }
                     active={ currentPath === ROUTES.monitor }
                     name={ t('navBar.monitor') }
                     onButtonClick={ toMonitor }/>

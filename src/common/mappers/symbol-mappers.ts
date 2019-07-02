@@ -1,9 +1,10 @@
 import { PortfolioSymbolItem } from '../../store/symbol/typings';
+import { SearchResult } from '../../services/typings';
 
 export const parser = (jsonObj: JSON[], pattern: string) => {
     let array: any = [];
 
-    for (let key in jsonObj) {
+    for ( let key in jsonObj ) {
         // @ts-ignore
         array.push(parseFloat(jsonObj[ key ][ pattern ]));
     }
@@ -21,3 +22,14 @@ export const symbolPortfolioMapper = (res: any, shares: string, buy: string): Po
         buy: buy
     }
 };
+
+export function symbolsSearchMapper(res: any): SearchResult[] {
+    return res.bestMatches
+        ? res.bestMatches.map(
+            (bestMatch: any) => ({
+                symbol: bestMatch[ '1. symbol' ],
+                description: bestMatch[ '2. name' ]
+            }),
+        )
+        : [ { symbol: 'error', description: '' } ];
+}

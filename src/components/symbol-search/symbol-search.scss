@@ -1,7 +1,6 @@
 @import './../../styles/index';
 
 .total-row {
-
   input {
     padding: 5px;
     width: 400px;
@@ -9,8 +8,38 @@
     box-sizing: border-box;
     outline: none;
     border: none;
-    border-right: 1px solid $_COLOR_ALUMINIUM!important;
+    border-right: 1px solid $_COLOR_ALUMINIUM !important;
   }
 
+  .search-result-list {
+    margin-left: -1px;
+    position: absolute;
+    box-sizing: border-box;
+    width: 401px;
+    max-height: 100px;
+    border: 1px solid $_COLOR_ALUMINIUM;
+    overflow: auto;
+    z-index: 999;
+    @include column-direction;
+
+    &__item {
+      display: flex;
+
+      span:first-child {
+        width: 20%;
+        justify-content: space-between;
+        @include row-direction;
+      }
+
+      span:last-child {
+        width: 80%;
+      }
+    }
+
+    &__item:hover {
+      cursor: pointer;
+      color: $_COLOR_NEON_CARROT;
+    }
+  }
 
 }

@@ -25,7 +25,8 @@ const initialState: SymbolState = {
             shares: '43'
         }
     ],
-    portfolio: []
+    portfolio: [],
+    isLoading: false
 };
 
 export type SymbolAction = ActionType<typeof actions>;
@@ -40,13 +41,21 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             }
         }
 
+        case getType(actions.fetchSymbol): {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+
         case getType(actions.fetchSymbolSuccess): {
             return {
                 ...state,
                 portfolio: [
                     ...state.portfolio,
                     action.payload
-                ]
+                ],
+                isLoading: false
             }
         }
         default: {

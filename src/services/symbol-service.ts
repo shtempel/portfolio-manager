@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 import { extractData } from '../common/mappers/axios-mappers';
-import { Interval, RequestFunction } from '../store/symbol/typings';
+import { Interval, RequestFunction, SearchSymbolsInterval } from '../store/symbol/typings';
 
 const API_KEY = 'HXUPIOKPMJR44CYI';
 const BASE_URL = 'https://www.alphavantage.co/query';
 const SymbolService = () => {
     return {
-        symbolSearch(keywords: string, interval: Interval.sixty) {
+        symbolSearch(keywords: string, interval: SearchSymbolsInterval = Interval.sixty) {
             return axios
                 .get(BASE_URL,
                     {
@@ -22,7 +22,7 @@ const SymbolService = () => {
                 .then(extractData)
         },
 
-        getSymbol(symbol: string, interval = Interval.sixty) {
+        getSymbol(symbol: string, interval: SearchSymbolsInterval = Interval.sixty) {
             return axios
                 .get(BASE_URL,
                     {

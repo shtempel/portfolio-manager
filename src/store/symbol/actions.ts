@@ -26,3 +26,18 @@ export const addPendingSymbolToPortfolio = createAction(
     'ADD_PENDING_SYMBOL_TO_PORTFOLIO',
     resolve => (symbol: PendingSymbolItem) => resolve(symbol)
 );
+
+export const fetchPendingSymbol = createAction(
+    'FETCH_PENDING_SYMBOL',
+    resolve => (id: string) => resolve(id)
+);
+
+export const fetchPendingSymbolSuccess = createAction(
+    'FETCH_PENDING_SYMBOL_SUCCESS',
+    resolve => (symbol: PendingSymbolItem) => resolve(symbol)
+);
+
+export const fetchPendingSymbolFail = createAction(
+    'FETCH_PENDING_SYMBOL_FAIL',
+    resolve => (error: Error) => resolve(error)
+);
