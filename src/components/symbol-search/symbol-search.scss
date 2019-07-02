@@ -1,6 +1,8 @@
 @import './../../styles/index';
 
 .total-row {
+  @include row-direction;
+
   input {
     padding: 5px;
     width: 400px;
@@ -11,8 +13,36 @@
     border-right: 1px solid $_COLOR_ALUMINIUM !important;
   }
 
+  .cancel-save {
+    cursor: pointer;
+    font-size: small;
+    margin-left: -15px;
+  }
+
+  .cancel-save:hover {
+    color: $_COLOR_ALUMINIUM;
+    box-sizing: border-box;
+  }
+
+  .shares-buy-input {
+    width: 150px;
+  }
+
+  .total-controls {
+    width: 200px;
+    justify-content: space-between;
+    @include row-direction;
+
+    button {
+      border: none;
+      width: 100%;
+      background-color: $_COLOR_ATHENS_GRAY;
+      border-right: 1px solid $_COLOR_ALUMINIUM;
+    }
+  }
+
   .search-result-list {
-    margin-left: -1px;
+    margin: 25px 0 0 -1px;
     position: absolute;
     box-sizing: border-box;
     width: 401px;

@@ -11,7 +11,7 @@ export const Header: FC = () => {
     return (
         <div className='header'>
             <Icon icon='react' iconPrefix='fab'/>
-            <h1>{ t('header.title') }</h1>
+            <h1>{ t('title') }</h1>
         </div>
     );
 };

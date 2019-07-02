@@ -1,22 +1,13 @@
 {
-  "header": {
-    "title": "Portfolio Manager"
-  },
-  "navBar": {
-    "manage": "Manage",
-    "monitor": "Monitor"
-  },
-  "table": {
-    "symbol": "Symbol",
-    "shares": "Shares",
-    "buy": "Buy",
-    "current": "Current",
-    "total": "Total"
-  },
-  "search": {
-    "placeholder": "Please enter symbol..."
-  },
-  "tableFooter": {
-    "total": "Total"
-  }
+  "title": "Portfolio Manager",
+  "manage": "Manage",
+  "monitor": "Monitor",
+  "symbol": "Symbol",
+  "shares": "Shares",
+  "buy": "Buy",
+  "current": "Current",
+  "total": "Total",
+  "searchPlaceholder": "Please enter symbol...",
+  "buyPlaceholder": "Add buy",
+  "sharesPlaceholder": "Add shares"
 }

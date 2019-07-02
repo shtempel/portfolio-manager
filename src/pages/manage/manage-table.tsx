@@ -55,15 +55,15 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
         data: [ ...symbols ],
         columns: [
             {
-                Header: t('table.symbol'),
+                Header: t('symbol'),
                 headerClassName: 'header',
                 accessor: 'symbol',
                 width: 400,
                 className: 'symbol-cell',
-                Footer: <span style={ footerStyle }>{ t('tableFooter.total') }</span>
+                Footer: <span style={ footerStyle }>{ t('total') }</span>
             },
             {
-                Header: t('table.shares'),
+                Header: t('shares'),
                 headerClassName: 'header',
                 accessor: 'shares',
                 width: 150,
@@ -71,7 +71,7 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
                 Footer: <span style={ footerStyle }>{ totalPendingShares }</span>
             },
             {
-                Header: t('table.buy'),
+                Header: t('buy'),
                 headerClassName: 'header',
                 accessor: 'buy',
                 width: 150,

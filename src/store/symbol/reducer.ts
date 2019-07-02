@@ -34,6 +34,16 @@ export type SymbolAction = ActionType<typeof actions>;
 const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, action) => {
 
     switch (action.type) {
+        case getType(actions.addPendingSymbol): {
+            return {
+                ...state,
+                pendingSymbols: [
+                    ...state.pendingSymbols,
+                    action.payload
+                ]
+            }
+        }
+
         case getType(actions.deletePendingSymbol): {
             return {
                 ...state,

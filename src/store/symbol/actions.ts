@@ -22,6 +22,11 @@ export const deletePendingSymbol = createAction(
     resolve => (id: string) => resolve(id)
 );
 
+export const addPendingSymbol = createAction(
+    'ADD_PENDING_SYMBOL',
+    resolve => (symbol: PendingSymbolItem) => resolve(symbol)
+);
+
 export const addPendingSymbolToPortfolio = createAction(
     'ADD_PENDING_SYMBOL_TO_PORTFOLIO',
     resolve => (symbol: PendingSymbolItem) => resolve(symbol)

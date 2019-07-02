@@ -4,13 +4,17 @@
   display: flex;
   flex-direction: row;
   padding: 0 20px;
-  margin: 0 -20px  20px;
+  margin: 0 -20px 20px;
   background-color: $_COLOR_IRON;
 
   .nav-btn {
     padding: 5px 25px;
     border: 1px solid $_COLOR_ALUMINIUM;
-    background-color: #fafbfc;
+    background-color: $_COLOR_ATHENS_GRAY;
+
+    button:first-child {
+      margin-left: -1px;
+    }
   }
 
   i {

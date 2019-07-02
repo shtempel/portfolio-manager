@@ -36,12 +36,12 @@ const NavBar: FC<NavBarProps> = (props: NavBarProps) => {
         <div className='nav-bar'>
             <Button customClass='nav-btn'
                     active={ currentPath === ROUTES.manage }
-                    name={ t('navBar.manage') }
+                    name={ t('manage') }
                     onButtonClick={ toManage }/>
             <Button customClass='nav-btn'
                     disabled={ !isPortfolioAvailable }
                     active={ currentPath === ROUTES.monitor }
-                    name={ t('navBar.monitor') }
+                    name={ t('monitor') }
                     onButtonClick={ toMonitor }/>
         </div>
     );

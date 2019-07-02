@@ -34,10 +34,10 @@ export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) =>
     const config: TableConfig = {
         data: [ ...symbols ],
         columns: [
-            { Header: t('table.symbol'), accessor: 'symbol', width: 400, headerClassName: 'header' },
-            { Header: t('table.shares'), accessor: 'shares', width: 200, headerClassName: 'header' },
-            { Header: t('table.buy'), accessor: 'buy', width: 100, headerClassName: 'header' },
-            { Header: t('table.current'), accessor: 'current', width: 100, headerClassName: 'header' },
+            { Header: t('symbol'), accessor: 'symbol', width: 400, headerClassName: 'header' },
+            { Header: t('shares'), accessor: 'shares', width: 200, headerClassName: 'header' },
+            { Header: t('buy'), accessor: 'buy', width: 100, headerClassName: 'header' },
+            { Header: t('current'), accessor: 'current', width: 100, headerClassName: 'header' },
             { Header: '' }
         ],
         height: 300,
