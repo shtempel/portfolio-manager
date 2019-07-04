@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import { SymbolSearch, Table, TableConfig } from '../../components';
-import { deletePendingSymbol, fetchSymbol } from '../../store/symbol/actions';
+import { deletePendingSymbol, fetchPortfolioSymbol } from '../../store/symbol/actions';
 import { selectPendingSymbols, selectTotalPendingBuy, selectTotalPendingShares } from '../../store/symbol/selectors';
 import { PendingSymbolItem } from '../../store/symbol/typings';
 import { AppState } from '../../store/typings';
@@ -17,7 +17,7 @@ interface ManageTableProps {
     totalPendingShares: string;
     totalPendingBuy: string;
 
-    fetchSymbol(id: string): void;
+    fetchPortfolioSymbol(id: string): void;
     deletePendingSymbol(id: string): void;
 }
 
@@ -27,11 +27,11 @@ const mapStateToProps = (state: AppState) => ({
     totalPendingBuy: selectTotalPendingBuy(state)
 });
 
-const mapDispatchToProps = { deletePendingSymbol, fetchSymbol };
+const mapDispatchToProps = { deletePendingSymbol, fetchPortfolioSymbol };
 
 const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
     const { t } = useTranslation();
-    const { pendingSymbols, deletePendingSymbol, totalPendingShares, totalPendingBuy, fetchSymbol } = props;
+    const { pendingSymbols, deletePendingSymbol, totalPendingShares, totalPendingBuy, fetchPortfolioSymbol } = props;
     const footerStyle: CSSProperties = {
         display: 'flex',
         height: '10%',
@@ -45,7 +45,7 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
         return {
             symbol: <SymbolCell symbol={ symbol }
                                 deletePendingSymbol={ deletePendingSymbol }
-                                fetchSymbol={ fetchSymbol }/>,
+                                fetchSymbol={ fetchPortfolioSymbol }/>,
             shares: symbol.shares,
             buy: symbol.buy
         }

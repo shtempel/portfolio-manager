@@ -32,7 +32,7 @@ export const Button: FC<ButtonProps> = (props: ButtonProps) => {
                 name={ name }
                 iconPrefix={ icon.iconPrefix }/>
         : <button type={ buttonType }
-                  className={ cn(`button ${ customClass }`, { 'active-button': props.active }) }
+                  className={ cn(`button ${ customClass }`, { 'active-button': props.active }, { 'not-active-btn': disabled }) }
                   disabled={ disabled }
                   id={ id }
                   onClick={ onButtonClick }>{ name }</button>;

@@ -26,9 +26,10 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
     const [ pendingSymbol, setPendingSymbol ] = useState<string>('');
     const [ addSymbolMode, setAddSymbolMode ] = useState<boolean>(false);
     const [ sharesBuy, setSharesBuy ] = useState<{ shares: string, buy: string }>({ shares: '', buy: '' });
+    const isAddAvailable: boolean = sharesBuy.shares === '' || sharesBuy.buy === '';
 
     const fetchSymbolsList = (e: React.FormEvent<HTMLInputElement>) => {
-        if (e.currentTarget.value.length > 1) {
+        if ( e.currentTarget.value.length > 1 ) {
             symbolService.symbolSearch(e.currentTarget.value)
                 .then(res => setSearchResult(symbolsSearchMapper(res)))
         }
@@ -94,7 +95,7 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
 
     const totalControls: ReactNode = (
         <div className='total-controls'>
-            <Button name='add' onButtonClick={ addSymbol }/>
+            <Button name='add' onButtonClick={ addSymbol } disabled={ isAddAvailable }/>
             <Button name='cancel' onButtonClick={ cancelAddSymbolMode }/>
         </div>
     );

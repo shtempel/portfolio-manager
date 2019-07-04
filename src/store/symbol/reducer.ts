@@ -5,26 +5,7 @@ import { SymbolState } from './typings';
 import * as actions from './actions';
 
 const initialState: SymbolState = {
-    pendingSymbols: [
-        {
-            symbol: 'msft',
-            buy: '100',
-            description: 'asdasdasd',
-            shares: '23'
-        },
-        {
-            symbol: 'aapl',
-            buy: '200',
-            description: 'asdasdasd',
-            shares: '43'
-        },
-        {
-            symbol: 'aap',
-            buy: '200',
-            description: 'asdasdasd',
-            shares: '43'
-        }
-    ],
+    pendingSymbols: [],
     portfolio: [],
     isLoading: false
 };
@@ -51,14 +32,14 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             }
         }
 
-        case getType(actions.fetchSymbol): {
+        case getType(actions.fetchPortfolioSymbol): {
             return {
                 ...state,
                 isLoading: true
             }
         }
 
-        case getType(actions.fetchSymbolSuccess): {
+        case getType(actions.fetchPortfolioSymbolSuccess): {
             return {
                 ...state,
                 portfolio: [

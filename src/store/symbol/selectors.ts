@@ -15,6 +15,7 @@ export const selectIsPortfolioAvailable = createSelector(
     [ selectPortfolio ],
     portfolio => portfolio.length > 0
 );
+
 // Pending
 export const selectPendingSymbols = createSelector(
     [ slice ],
@@ -25,13 +26,12 @@ export const selectTotalPendingShares = createSelector(
     [ selectPendingSymbols ],
     pendingSymbols => pendingSymbols
         .map(pendingSymbol => parseInt(pendingSymbol.shares, 10))
-        .reduce((accumulator, currentValue) => accumulator + currentValue).toString()
+        .reduce((accumulator, currentValue) => accumulator + currentValue, '').toString()
 );
-
 
 export const selectTotalPendingBuy = createSelector(
     [ selectPendingSymbols ],
     pendingSymbols => pendingSymbols
         .map(pendingSymbol => parseInt(pendingSymbol.buy, 10) * parseInt(pendingSymbol.shares, 10))
-        .reduce((accumulator, currentValue) => accumulator + currentValue).toString()
+        .reduce((accumulator, currentValue) => accumulator + currentValue, '').toString()
 );

@@ -12,7 +12,7 @@
     border: 1px solid $_COLOR_ALUMINIUM;
     background-color: $_COLOR_ATHENS_GRAY;
 
-    button:first-child {
+    &:last-child {
       margin-left: -1px;
     }
   }
