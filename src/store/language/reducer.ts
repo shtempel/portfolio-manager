@@ -5,8 +5,11 @@ import { Languages } from '../../services/typings';
 
 
 import * as actions from './actions';
+import { restoreSavedState } from '../saved-state/actions';
 
-export type LanguageAction = ActionType<typeof actions>;
+export type LanguageAction =
+    | ActionType<typeof actions>
+    | ActionType<typeof restoreSavedState>;
 
 export const initialState: string = Languages.en;
 
@@ -16,6 +19,11 @@ const reducer: Reducer<string, LanguageAction> = (state = initialState, action) 
             case getType(actions.setLanguage): {
                 return action.payload;
             }
+
+            case getType(restoreSavedState): {
+                return action.payload.language!;
+            }
+
 
             default: {
                 return state;

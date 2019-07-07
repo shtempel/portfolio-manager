@@ -1,12 +1,20 @@
 @import './../../styles/index';
 
+
 .header {
+  justify-content: space-between;
   align-items: center;
   @include row-direction;
 
-  i {
-    margin-right: 20px;
-    font-size: 43px;
-    color: $_COLOR_EMPEROR;
+  .left {
+    align-items: center;
+    @include row-direction;
+
+    i {
+      margin-right: 20px;
+      font-size: 43px;
+      color: $_COLOR_EMPEROR;
+    }
+
   }
 }

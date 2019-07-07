@@ -5,3 +5,4 @@ export * from './header/header';
 
 export { default as NavBar }  from './nav-bar/nav-bar';
 export { default as SymbolSearch }  from './symbol-search/symbol-search';
+export { default as LangPanel } from './lang-panel/lang-panel'

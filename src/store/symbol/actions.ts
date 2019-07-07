@@ -2,16 +2,19 @@ import { createAction } from 'typesafe-actions';
 
 import { PendingSymbolItem, PortfolioSymbolItem } from './typings';
 
-export const deletePendingSymbol = createAction(
-    'DELETE_PENDING_SYMBOL',
-    resolve => (id: string) => resolve(id)
-);
+// Pending Symbols
 
 export const addPendingSymbol = createAction(
     'ADD_PENDING_SYMBOL',
     resolve => (symbol: PendingSymbolItem) => resolve(symbol)
 );
 
+export const deletePendingSymbol = createAction(
+    'DELETE_PENDING_SYMBOL',
+    resolve => (id: string) => resolve(id)
+);
+
+// Portfolio
 export const fetchPortfolioSymbol = createAction(
     'FETCH_PORTFOLIO_SYMBOL',
     resolve => (id: string) => resolve(id)

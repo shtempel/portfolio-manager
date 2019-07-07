@@ -1,0 +1,17 @@
+@import'./../../styles/index';
+
+.lang-panel {
+  .active {
+    cursor: default!important;
+    background-color: $_COLOR_MANGO_TANGO!important;
+    color: $_COLOR_WHITE !important;
+  }
+
+  .not-active {
+    cursor: pointer;
+    font-size: small;
+    padding: 3px;
+    color: $_COLOR_SILVER_CHALICE;
+    background-color: $_COLOR_EMPEROR;
+  }
+}
