@@ -1,7 +1,7 @@
 export interface SymbolState {
     portfolio: PortfolioSymbolItem[];
     pendingSymbols: PendingSymbolItem[];
-    isLoading: boolean;
+    isFetching: boolean;
 }
 
 export interface PortfolioSymbolItem {
@@ -9,8 +9,8 @@ export interface PortfolioSymbolItem {
     lastRefreshed: string;
     currentValue: string;
     history: number[];
-    shares: string;
-    buy: string;
+    shares?: string;
+    buy?: string;
 }
 
 export interface PendingSymbolItem {

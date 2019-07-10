@@ -12,7 +12,7 @@ export const Header: FC = () => {
         <div className='header row'>
             <div className='left'>
                 <Icon icon='react' iconPrefix='fab'/>
-                <h1>{ t('title') }</h1>
+                <h1>{ t( 'title' ) }</h1>
             </div>
             <LangPanel/>
         </div>

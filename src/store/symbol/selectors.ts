@@ -2,12 +2,17 @@ import { createSelector } from 'reselect';
 
 import { AppState } from '../typings';
 
-const slice = (state: AppState) => state.symbolState;
+const state = (state: AppState) => state.symbolState;
+
+export const selectIsSymbolFetching = createSelector(
+    [ state ],
+    state => state.isFetching
+);
 
 // Portfolio
 
 export const selectPortfolio = createSelector(
-    [ slice ],
+    [ state ],
     state => state.portfolio
 );
 
@@ -18,7 +23,7 @@ export const selectIsPortfolioAvailable = createSelector(
 
 // Pending
 export const selectPendingSymbols = createSelector(
-    [ slice ],
+    [ state ],
     state => state.pendingSymbols
 );
 

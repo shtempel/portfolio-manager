@@ -1,16 +1,19 @@
 import { Reducer } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 
-import { SymbolState } from './typings';
+import { restoreSavedState } from '../saved-state/actions';
+import { PendingSymbolItem, SymbolState } from './typings';
 import * as actions from './actions';
 
 const initialState: SymbolState = {
     pendingSymbols: [],
     portfolio: [],
-    isLoading: false
+    isFetching: false
 };
 
-export type SymbolAction = ActionType<typeof actions>;
+export type SymbolAction =
+    | ActionType<typeof actions>
+    | ActionType<typeof restoreSavedState>;
 
 const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, action) => {
 
@@ -35,20 +38,45 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
         case getType(actions.fetchPortfolioSymbol): {
             return {
                 ...state,
-                isLoading: true
+                isFetching: true
+            }
+        }
+
+        case getType(actions.fetchPortfolioSymbolFail): {
+            return {
+                ...state,
+                isFetching: false
             }
         }
 
         case getType(actions.fetchPortfolioSymbolSuccess): {
+            const sharesBuy: { shares: string, buy: string } = state.pendingSymbols
+                .filter((symbol: PendingSymbolItem) => symbol.symbol === action.payload.name)
+                .reduce((item: PendingSymbolItem) => item);
+
             return {
                 ...state,
                 portfolio: [
                     ...state.portfolio,
-                    action.payload
+                    {
+                        ...action.payload,
+                        ...sharesBuy
+                    }
                 ],
-                isLoading: false
+                isFetching: false
             }
         }
+
+        case getType(restoreSavedState): {
+            const { pending, portfolio } = action.payload;
+
+            return {
+                ...state,
+                pendingSymbols: pending || [],
+                portfolio: portfolio || []
+            }
+        }
+
         default: {
             return state;
         }

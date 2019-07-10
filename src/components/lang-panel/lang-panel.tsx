@@ -17,7 +17,7 @@ interface LangPanelProps {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    language: selectLanguage(state),
+    language: selectLanguage( state ),
 });
 
 const mapDispatchToProps = { setLanguage };
@@ -28,7 +28,7 @@ const LangPanel: FC<LangPanelProps> = (props: LangPanelProps) => {
 
     const changeLanguage = (e: any) => {
         if ( e.target.id !== language ) {
-            setLanguage(e.target.id);
+            setLanguage( e.target.id );
             window.location.reload();
         }
     };
@@ -37,10 +37,10 @@ const LangPanel: FC<LangPanelProps> = (props: LangPanelProps) => {
         <div className='lang-panel row'>
             <span id={ Languages.en }
                   onClick={ changeLanguage }
-                  className={ cn('not-active', { 'active': language === 'en-US' }) }>{ t('eng') }</span>
+                  className={ cn( 'not-active', { 'active': language === 'en-US' } ) }>{ t( 'eng' ) }</span>
             <span id={ Languages.ru }
                   onClick={ changeLanguage }
-                  className={ cn('not-active', { 'active': language === 'ru-RU' }) }>{ t('rus') }</span>
+                  className={ cn( 'not-active', { 'active': language === 'ru-RU' } ) }>{ t( 'rus' ) }</span>
         </div>
     );
 };
@@ -48,4 +48,4 @@ const LangPanel: FC<LangPanelProps> = (props: LangPanelProps) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LangPanel);
+)( LangPanel );

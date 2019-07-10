@@ -5,6 +5,7 @@ import { PendingSymbolItem } from '../../store/symbol/typings';
 
 interface CustomCellProps {
     symbol: PendingSymbolItem;
+    isFetching: boolean;
 
     deletePendingSymbol(id: string): void;
     fetchSymbol(id: string): void;
@@ -16,7 +17,8 @@ export const SymbolCell: FC<CustomCellProps> = (props: CustomCellProps) => {
             { props.symbol.symbol }
             <div className='buttons-row'>
                 <Button id={ props.symbol.symbol }
-                        onButtonClick={ (e) => props.fetchSymbol(e.target.id) }
+                        disabled={ props.isFetching }
+                        onButtonClick={ (e) => !props.isFetching && props.fetchSymbol(e.target.id) }
                         icon={ { iconPrefix: 'fas', iconName: 'briefcase' } }/>
                 <Button id={ props.symbol.symbol }
                         onButtonClick={ (e) => props.deletePendingSymbol(e.target.id) }

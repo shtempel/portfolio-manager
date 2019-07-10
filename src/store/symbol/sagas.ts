@@ -14,8 +14,8 @@ function* watchFetchPortfolioSymbol() {
 function* fetchPortfolioSymbol(action: ReturnType<typeof actions.fetchPortfolioSymbol>) {
     try {
         const fetchedSymbol = yield call(symbolService.getSymbol, action.payload);
-        yield put(actions.fetchPortfolioSymbolSuccess(symbolPortfolioMapper(fetchedSymbol, '1', '2')));
-    } catch ( error ) {
+        yield put(actions.fetchPortfolioSymbolSuccess(symbolPortfolioMapper(fetchedSymbol)));
+    } catch (error) {
         yield put(actions.fetchPortfolioSymbolFail(error));
         console.log(error)
     }
