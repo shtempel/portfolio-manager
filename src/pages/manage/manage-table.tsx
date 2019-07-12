@@ -5,12 +5,11 @@ import { connect } from 'react-redux';
 import { SymbolSearch, Table, TableConfig } from '../../components';
 import { deletePendingSymbol, fetchPortfolioSymbol } from '../../store/symbol/actions';
 import {
-    selectIsSymbolFetching,
-    selectPendingSymbols,
+    selectPendingSymbols, selectPortfolio,
     selectTotalPendingBuy,
     selectTotalPendingShares
 } from '../../store/symbol/selectors';
-import { PendingSymbolItem } from '../../store/symbol/typings';
+import { PendingSymbolItem, PortfolioSymbolItem } from '../../store/symbol/typings';
 import { AppState } from '../../store/typings';
 import { SymbolCell } from './symbol-cell';
 
@@ -19,9 +18,9 @@ import './manage.scss';
 
 interface ManageTableProps {
     pendingSymbols: PendingSymbolItem[];
+    portfolioSymbols: PortfolioSymbolItem[];
     totalPendingShares: string;
     totalPendingBuy: string;
-    isFetching: boolean;
 
     fetchPortfolioSymbol(id: string): void;
     deletePendingSymbol(id: string): void;
@@ -29,9 +28,9 @@ interface ManageTableProps {
 
 const mapStateToProps = (state: AppState) => ({
     pendingSymbols: selectPendingSymbols(state),
+    portfolioSymbols: selectPortfolio(state),
     totalPendingShares: selectTotalPendingShares(state),
-    totalPendingBuy: selectTotalPendingBuy(state),
-    isFetching: selectIsSymbolFetching(state)
+    totalPendingBuy: selectTotalPendingBuy(state)
 });
 
 const mapDispatchToProps = { deletePendingSymbol, fetchPortfolioSymbol };
@@ -40,11 +39,11 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
     const { t } = useTranslation();
     const {
         pendingSymbols,
+        portfolioSymbols,
         deletePendingSymbol,
         totalPendingShares,
         totalPendingBuy,
         fetchPortfolioSymbol,
-        isFetching
     } = props;
 
     const footerStyle: CSSProperties = {
@@ -60,9 +59,9 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
     const symbols = pendingSymbols.map((symbol: PendingSymbolItem) => {
         return {
             symbol: <SymbolCell symbol={ symbol }
+                                portfolioSymbols={portfolioSymbols}
                                 deletePendingSymbol={ deletePendingSymbol }
-                                fetchSymbol={ fetchPortfolioSymbol }
-                                isFetching={ isFetching }/>,
+                                fetchSymbol={ fetchPortfolioSymbol }/>,
             shares: symbol.shares,
             buy: symbol.buy
         }

@@ -2,7 +2,11 @@ import { call, put, select, takeEvery, throttle } from 'redux-saga/effects';
 import { LOCATION_CHANGE, push } from "connected-react-router";
 import { getType } from 'typesafe-actions';
 
-import { addPendingSymbol, deletePendingSymbol, fetchPortfolioSymbol } from '../symbol/actions';
+import {
+    addPendingSymbol,
+    deletePendingSymbol,
+    fetchPortfolioSymbolSuccess
+} from '../symbol/actions';
 import { AppSavedState } from '../typings';
 import { selectSavedState } from './selectors';
 import * as actions from './actions';
@@ -14,7 +18,7 @@ const saveStateActions: string[] = [
     getType( setLanguage ),
     getType( addPendingSymbol ),
     getType( deletePendingSymbol ),
-    getType( fetchPortfolioSymbol )
+    getType( fetchPortfolioSymbolSuccess )
 ];
 
 const SAVE_STATE_THROTTLE = 500;

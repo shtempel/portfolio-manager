@@ -1,19 +1,27 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { memo, FC, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from '..';
 import { addPendingSymbol } from '../../store/symbol/actions';
+import { selectPendingSymbols } from '../../store/symbol/selectors';
 import { PendingSymbolItem } from '../../store/symbol/typings';
 import { symbolService } from '../../services';
 import { symbolsSearchMapper } from '../../common/mappers/symbol-mappers';
 import { SearchResult } from '../../services/typings';
+import { AppState } from '../../store/typings';
 
 import './symbol-search.scss';
 
 interface SymbolSearchProps {
+    pendingSymbols: PendingSymbolItem[];
+
     addPendingSymbol(symbol: PendingSymbolItem): void;
 }
+
+const mapStateToProps = (state: AppState) => ({
+    pendingSymbols: selectPendingSymbols(state)
+});
 
 const mapDispatchToProps = {
     addPendingSymbol
@@ -21,12 +29,12 @@ const mapDispatchToProps = {
 
 export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) => {
     const { t } = useTranslation();
-    const { addPendingSymbol } = props;
+    const { addPendingSymbol, pendingSymbols } = props;
     const [ searchResult, setSearchResult ] = useState<SearchResult[]>([]);
     const [ pendingSymbol, setPendingSymbol ] = useState<string>('');
     const [ addSymbolMode, setAddSymbolMode ] = useState<boolean>(false);
     const [ sharesBuy, setSharesBuy ] = useState<{ shares: string, buy: string }>({ shares: '', buy: '' });
-    const isAddAvailable: boolean = sharesBuy.shares === '' || sharesBuy.buy === '';
+    const isAddDisabled: boolean = sharesBuy.shares === '' || sharesBuy.buy === '';
 
     const fetchSymbolsList = (e: React.FormEvent<HTMLInputElement>) => {
         if ( e.currentTarget.value.length > 1 ) {
@@ -58,22 +66,30 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
         </div>
     );
 
-    const searchResultList: ReactNode = (
-        <div className='search-result-list'>
-            {
-                searchResult.map((result: SearchResult) => (
-                    <div className='search-result-list__item'
-                         key={ result.symbol } id={ result.symbol }>
-                        <span
-                            onClick={ startEditMode }>
-                            { result.symbol }
-                        </span>
-                        <span onClick={ startEditMode }>  { result.description }</span>
-                    </div>
-                ))
-            }
-        </div>
-    );
+    const getSearchResultList = (): ReactNode => {
+        const existPending: string[] = pendingSymbols.reduce<string[]>((acc, item) => acc.concat(item.symbol), []);
+
+        return (
+            <div className='search-result-list'>
+                {
+                    searchResult.map((result: SearchResult): ReactNode => {
+                            const getResultNode = (resultItem: SearchResult): ReactNode =>
+                                (
+                                    <div className='search-result-list__item'
+                                         key={ resultItem.symbol }
+                                         id={ resultItem.symbol }>
+                                        <span onClick={ startEditMode }>{ resultItem.symbol }</span>
+                                        <span onClick={ startEditMode }>  { resultItem.description }</span>
+                                    </div>
+                                );
+
+                            return !existPending.includes(result.symbol.toLowerCase()) && getResultNode(result)
+                        }
+                    )
+                }
+            </div>
+        )
+    };
 
     const searchInput: ReactNode = addSymbolMode
         ? addSymbolInput
@@ -95,7 +111,7 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
 
     const totalControls: ReactNode = (
         <div className='total-controls'>
-            <Button name='add' onButtonClick={ addSymbol } disabled={ isAddAvailable }/>
+            <Button name='add' onButtonClick={ addSymbol } disabled={ isAddDisabled }/>
             <Button name='cancel' onButtonClick={ cancelAddSymbolMode }/>
         </div>
     );
@@ -103,7 +119,7 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
     return (
         <div className='total-row'>
             { searchInput }
-            { (!addSymbolMode && searchResult.length > 0) && searchResultList }
+            { (!addSymbolMode && searchResult.length > 0) && getSearchResultList() }
             { addSymbolMode && getSharesBuyNodes('shares') }
             { addSymbolMode && getSharesBuyNodes('buy') }
             { addSymbolMode && totalControls }
@@ -112,6 +128,6 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
 };
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
-)(SymbolSearch);
+)(memo(SymbolSearch));

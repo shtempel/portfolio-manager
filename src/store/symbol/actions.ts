@@ -29,3 +29,8 @@ export const fetchPortfolioSymbolFail = createAction(
     'FETCH_PORTFOLIO_SYMBOL_FAIL',
     resolve => (error: Error) => resolve(error)
 );
+
+export const deletePortfolioSymbol = createAction(
+    'DELETE_PORTFOLIO_SYMBOL',
+    resolve => (id: string) => resolve(id)
+);

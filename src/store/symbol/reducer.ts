@@ -67,6 +67,13 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             }
         }
 
+        case getType(actions.deletePortfolioSymbol): {
+            return {
+                ...state,
+                portfolio: state.portfolio.filter(item => item.name !== action.payload)
+            }
+        }
+
         case getType(restoreSavedState): {
             const { pending, portfolio } = action.payload;
 
