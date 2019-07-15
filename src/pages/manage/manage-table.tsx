@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
@@ -11,6 +11,7 @@ import {
 } from '../../store/symbol/selectors';
 import { PendingSymbolItem, PortfolioSymbolItem } from '../../store/symbol/typings';
 import { AppState } from '../../store/typings';
+import { footerStyle } from '../inline-styles';
 import { SymbolCell } from './symbol-cell';
 
 import 'react-table/react-table.css';
@@ -45,16 +46,6 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
         totalPendingBuy,
         fetchPortfolioSymbol,
     } = props;
-
-    const footerStyle: CSSProperties = {
-        display: 'flex',
-        height: '10%',
-        fontWeight: 'bold',
-        fontSize: '14px',
-        justifyContent: 'center',
-        color: '#8A8A96',
-        backgroundColor: '#FAFBFC'
-    };
 
     const symbols = pendingSymbols.map((symbol: PendingSymbolItem) => {
         return {
