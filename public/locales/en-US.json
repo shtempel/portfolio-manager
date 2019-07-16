@@ -11,5 +11,6 @@
   "total": "Total",
   "searchPlaceholder": "Please enter symbol...",
   "buyPlaceholder": "Add buy",
-  "sharesPlaceholder": "Add shares"
+  "sharesPlaceholder": "Add shares",
+  "chartTitle": "Portfolio"
 }

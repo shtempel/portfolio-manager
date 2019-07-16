@@ -11,5 +11,6 @@
   "total": "Итого",
   "searchPlaceholder": "Пожалуйста, введите тикер...",
   "buyPlaceholder": "Введите цену",
-  "sharesPlaceholder": "Введите количество"
+  "sharesPlaceholder": "Введите количество",
+  "chartTitle": "Портфолио"
 }

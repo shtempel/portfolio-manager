@@ -53,14 +53,14 @@ const reducer: Reducer<SymbolState, SymbolAction> = (state = initialState, actio
             const sharesBuy: { shares: string, buy: string } = state.pendingSymbols
                 .filter((symbol: PendingSymbolItem) => symbol.symbol === action.payload.name)
                 .reduce((item: PendingSymbolItem) => item);
-
             return {
                 ...state,
                 portfolio: [
                     ...state.portfolio,
                     {
                         ...action.payload,
-                        ...sharesBuy
+                        shares: sharesBuy.shares,
+                        buy: sharesBuy.buy
                     }
                 ],
                 isFetching: false

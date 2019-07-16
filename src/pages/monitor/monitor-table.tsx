@@ -1,10 +1,13 @@
-import React, { memo, FC } from 'react';
+import { push } from 'connected-react-router';
+import React, { memo, FC, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
-import { Table, TableConfig } from '../../components';
+import { Table, TableConfig, Chart } from '../../components';
+import { ROUTES } from '../../routes';
 import { deletePortfolioSymbol } from '../../store/symbol/actions';
 import {
+    selectIsPortfolioAvailable,
     selectPortfolio,
     selectPortfolioTotalBuy,
     selectPortfolioTotalCurrent,
@@ -20,7 +23,9 @@ interface MonitorTableProps {
     currentTotal: string;
     portfolioTotalBuy: string;
     portfolioTotalShares: string;
+    isPortfolioAvailable: boolean;
 
+    push(path: string): void;
     deletePortfolioSymbol(id: string): void;
 }
 
@@ -28,18 +33,39 @@ const mapStateToProps = (state: AppState) => ({
     portfolio: selectPortfolio(state),
     currentTotal: selectPortfolioTotalCurrent(state),
     portfolioTotalBuy: selectPortfolioTotalBuy(state),
-    portfolioTotalShares: selectPortfolioTotalShares(state)
+    portfolioTotalShares: selectPortfolioTotalShares(state),
+    isPortfolioAvailable: selectIsPortfolioAvailable(state)
 });
 
-const mapDispatchToProps = { deletePortfolioSymbol };
+const mapDispatchToProps = { deletePortfolioSymbol, push };
 
 export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) => {
     const { t } = useTranslation();
-    const { portfolio, deletePortfolioSymbol, currentTotal, portfolioTotalBuy, portfolioTotalShares } = props;
+    const [ chartData, setChartData ] = useState<{ name: string, data: number[] }[]>([]);
+    const {
+        portfolio,
+        deletePortfolioSymbol,
+        currentTotal,
+        portfolioTotalBuy,
+        portfolioTotalShares,
+        isPortfolioAvailable,
+        push
+    } = props;
+
+    useEffect(() => { !isPortfolioAvailable && push(ROUTES.manage) });
+
+    const symbolToChart = (id: string) => {
+        const selected = portfolio.filter(item => item.name === id).map(item => ({
+            name: item.name,
+            data: item.history
+        }));
+        setChartData(selected);
+    };
+
     const symbols = portfolio.map((symbol: PortfolioSymbolItem) => {
         return {
             symbol: <SymbolCell symbol={ symbol }
-                                addSymbolToChart={ deletePortfolioSymbol }
+                                addSymbolToChart={ symbolToChart }
                                 deletePortfolioSymbol={ deletePortfolioSymbol }/>,
             shares: symbol.shares,
             buy: symbol.buy,
@@ -87,7 +113,12 @@ export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) =>
         height: 300,
     };
 
-    return <Table config={ config }/>
+    return (
+        <>
+            <Chart chartName={ t('chartTitle') } chartType='line' series={ chartData }/>
+            <Table config={ config }/>
+        </>
+    )
 };
 
 export default connect(

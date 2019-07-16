@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 import { AppState } from '../typings';
 
-const state = (state: AppState) => state.symbolState;
+const state = (state: AppState) => state.symbol;
 
 export const selectIsSymbolFetching = createSelector(
     [ state ],
