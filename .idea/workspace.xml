@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="afaf4663-3678-43b0-93a8-cd1b31ee6c9a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/chart/chart.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/chart/chart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/chart/actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/chart/reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/chart/typings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/monitor/typings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/en-US.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en-US.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/ru-RU.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/ru-RU.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/manage/manage-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/manage/manage-table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/monitor/monitor-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/monitor/monitor-table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/chart/actions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/chart/reducer.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/chart/typings.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/reducers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/symbol/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/symbol/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/symbol/selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/symbol/selectors.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/typings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/typings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -30,11 +23,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/manage/manage-table.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="83" column="20" lean-forward="true" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/monitor/monitor-table.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
-              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="741">
+              <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="67" selection-end-column="8" />
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
@@ -93,7 +98,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/store/symbol/selectors.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
+            <state relative-caret-position="342">
               <caret line="18" column="39" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="39" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
@@ -126,62 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/locales/ru-RU.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/typings.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/chart/typings.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/reducers.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#0#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/chart/reducer.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/chart/actions.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="48" selection-start-column="48" selection-end-column="48" />
+            <state relative-caret-position="57">
+              <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -246,7 +197,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>props</find>
       <find>new</find>
       <find>columns</find>
       <find>column</find>
@@ -276,6 +226,7 @@
       <find>ZigZag</find>
       <find>zigZag</find>
       <find>push</find>
+      <find>...</find>
     </findStrings>
     <replaceStrings>
       <replace>scrolling</replace>
@@ -297,7 +248,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/pages/manage/manage.scss" />
         <option value="$PROJECT_DIR$/src/components/icon/icon.tsx" />
         <option value="$PROJECT_DIR$/src/services/local-storage-service.ts" />
         <option value="$PROJECT_DIR$/src/services/index.ts" />
@@ -327,7 +277,6 @@
         <option value="$PROJECT_DIR$/src/pages/manage/symbol-cell.tsx" />
         <option value="$PROJECT_DIR$/src/components/symbol-search/symbol-search.tsx" />
         <option value="$PROJECT_DIR$/src/pages/inline-styles.ts" />
-        <option value="$PROJECT_DIR$/src/pages/manage/manage-table.tsx" />
         <option value="$PROJECT_DIR$/src/components/button/button.scss" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/chart/chart.scss" />
@@ -338,15 +287,17 @@
         <option value="$PROJECT_DIR$/public/locales/ru-RU.json" />
         <option value="$PROJECT_DIR$/public/locales/en-US.json" />
         <option value="$PROJECT_DIR$/src/services/symbol-service.ts" />
-        <option value="$PROJECT_DIR$/src/store/typings.ts" />
         <option value="$PROJECT_DIR$/src/store/chart/actions.ts" />
         <option value="$PROJECT_DIR$/src/store/symbol/selectors.ts" />
-        <option value="$PROJECT_DIR$/src/store/reducers.ts" />
         <option value="$PROJECT_DIR$/src/store/chart/typings.ts" />
         <option value="$PROJECT_DIR$/src/store/chart/reducer.ts" />
         <option value="$PROJECT_DIR$/src/pages/monitor/symbol-cell.tsx" />
         <option value="$PROJECT_DIR$/src/components/chart/chart.tsx" />
         <option value="$PROJECT_DIR$/src/store/symbol/reducer.ts" />
+        <option value="$PROJECT_DIR$/src/store/typings.ts" />
+        <option value="$PROJECT_DIR$/src/store/reducers.ts" />
+        <option value="$PROJECT_DIR$/src/pages/monitor/typings.ts" />
+        <option value="$PROJECT_DIR$/src/pages/manage/manage-table.tsx" />
         <option value="$PROJECT_DIR$/src/pages/monitor/monitor-table.tsx" />
       </list>
     </option>
@@ -363,6 +314,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -449,13 +401,6 @@
               <item name="portfolio-manager" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="store" type="462c0819:PsiDirectoryNode" />
-              <item name="chart" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="portfolio-manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="portfolio-manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="store" type="462c0819:PsiDirectoryNode" />
               <item name="saved-state" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -475,7 +420,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -535,12 +479,13 @@
       <workItem from="1562929322973" duration="7346000" />
       <workItem from="1563181805511" duration="5567000" />
       <workItem from="1563201915369" duration="16504000" />
-      <workItem from="1563277730866" duration="6769000" />
+      <workItem from="1563277730866" duration="7367000" />
+      <workItem from="1563354827414" duration="1317000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="226390000" />
+    <option name="totallyTimeSpent" value="228305000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -599,7 +544,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Новая папка/index.js" />
     <entry file="file://$PROJECT_DIR$/../Новая папка/index.html" />
     <entry file="file://$PROJECT_DIR$/src/styles/index.scss">
       <provider selected="true" editor-type-id="text-editor">
@@ -771,13 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/manage/manage-table.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/inline-styles.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -810,6 +747,36 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/store/chart/selectors.ts" />
+    <entry file="file://$PROJECT_DIR$/src/store/symbol/reducer.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/symbol/actions.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="48" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/chart/chart.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
@@ -834,17 +801,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/symbol/typings.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/common/mappers/symbol-mappers.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/symbol/selectors.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/nav-bar/nav-bar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-end-line="17" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -855,37 +835,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/locales/ru-RU.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/typings.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store/chart/typings.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/reducers.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#0#54#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -944,50 +897,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/symbol/reducer.ts">
+    <entry file="file://$PROJECT_DIR$/src/store/symbol/typings.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="152">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/reducers.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/symbol/actions.ts">
+    <entry file="file://$PROJECT_DIR$/src/store/typings.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="48" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/routes.tsx">
+    <entry file="file://$PROJECT_DIR$/public/locales/ru-RU.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="57">
+          <caret line="3" column="32" lean-forward="true" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/symbol/selectors.ts">
+    <entry file="file://$PROJECT_DIR$/src/pages/monitor/typings.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="18" column="39" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="76">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/nav-bar/nav-bar.tsx">
+    <entry file="file://$PROJECT_DIR$/src/pages/manage/manage-table.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-end-line="17" selection-end-column="29" />
+        <state relative-caret-position="338">
+          <caret line="83" column="20" lean-forward="true" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
@@ -996,8 +947,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/monitor/monitor-table.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+        <state relative-caret-position="741">
+          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="67" selection-end-column="8" />
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>

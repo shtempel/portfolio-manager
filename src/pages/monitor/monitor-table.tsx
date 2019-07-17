@@ -17,6 +17,7 @@ import { PortfolioSymbolItem } from '../../store/symbol/typings';
 import { AppState } from '../../store/typings';
 import { footerStyle } from '../inline-styles';
 import { SymbolCell } from './symbol-cell';
+import { ChartDataState } from './typings';
 
 interface MonitorTableProps {
     portfolio: PortfolioSymbolItem[];
@@ -41,7 +42,6 @@ const mapDispatchToProps = { deletePortfolioSymbol, push };
 
 export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) => {
     const { t } = useTranslation();
-    const [ chartData, setChartData ] = useState<{ name: string, data: number[] }[]>([]);
     const {
         portfolio,
         deletePortfolioSymbol,
@@ -51,14 +51,21 @@ export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) =>
         isPortfolioAvailable,
         push
     } = props;
+    const initialChartDataState: ChartDataState[] = portfolio.length
+        ? [ {
+            name: portfolio[ 0 ].name,
+            data: portfolio[ 0 ].history
+        } ]
+        : [];
 
     useEffect(() => { !isPortfolioAvailable && push(ROUTES.manage) });
+    const [ chartData, setChartData ] = useState<ChartDataState[]>(initialChartDataState);
 
     const symbolToChart = (id: string) => {
         const selected = portfolio.filter(item => item.name === id).map(item => ({
             name: item.name,
-            data: item.history
-        }));
+            data: [ ...item.history ]
+    }));
         setChartData(selected);
     };
 

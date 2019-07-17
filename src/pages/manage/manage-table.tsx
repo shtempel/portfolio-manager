@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
@@ -50,7 +50,7 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
     const symbols = pendingSymbols.map((symbol: PendingSymbolItem) => {
         return {
             symbol: <SymbolCell symbol={ symbol }
-                                portfolioSymbols={portfolioSymbols}
+                                portfolioSymbols={ portfolioSymbols }
                                 deletePendingSymbol={ deletePendingSymbol }
                                 fetchSymbol={ fetchPortfolioSymbol }/>,
             shares: symbol.shares,
@@ -101,4 +101,4 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ManageTable);
+)(memo(ManageTable));
