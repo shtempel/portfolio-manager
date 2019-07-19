@@ -1,0 +1,12 @@
+@import './../../styles/index';
+
+.toaster {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: small;
+  font-weight: bolder;
+  color: $_COLOR_WHITE;
+  background-color: $_COLOR_MANDY;
+  padding: 4px;
+}

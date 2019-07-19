@@ -5,7 +5,7 @@ import { Languages } from './typings';
 
 const DEFAULT_LANGUAGE = Languages.en;
 
-export function initTranslationService() {
+export const initTranslationService = () => {
     i18n
         .use(Backend)
         .use(initReactI18next) // passes i18n down to react-i18next
@@ -14,7 +14,7 @@ export function initTranslationService() {
 
             fallbackLng: DEFAULT_LANGUAGE,
 
-            whitelist: [Languages.en, Languages.ru],
+            whitelist: [ Languages.en, Languages.ru ],
 
             load: 'currentOnly',
 
@@ -29,6 +29,6 @@ export function initTranslationService() {
             }
         });
     return i18n;
-}
+};
 
 export default i18n;

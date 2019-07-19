@@ -14,6 +14,8 @@ export const deletePendingSymbol = createAction(
     resolve => (id: string) => resolve(id)
 );
 
+export const searchSymbolFail = createAction('SEARCH_SYMBOL_FAIL');
+
 // Portfolio
 export const fetchPortfolioSymbol = createAction(
     'FETCH_PORTFOLIO_SYMBOL',

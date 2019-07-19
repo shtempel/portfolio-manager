@@ -12,5 +12,7 @@
   "searchPlaceholder": "Please enter symbol...",
   "buyPlaceholder": "Add buy",
   "sharesPlaceholder": "Add shares",
-  "chartTitle": "Portfolio"
+  "chartTitle": "Portfolio",
+  "cannotLoadSymbols": "Unable to load symbols, please try again later",
+  "api": "Please wait for a while, service is not available at this moment"
 }

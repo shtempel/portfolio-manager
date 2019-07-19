@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 import { Button, Icon } from '..';
-import { addPendingSymbol } from '../../store/symbol/actions';
+import { addError } from '../../store/errors/actions';
+import { AppErrorType } from '../../store/errors/typings';
+import { addPendingSymbol, searchSymbolFail } from '../../store/symbol/actions';
 import { selectPendingSymbols } from '../../store/symbol/selectors';
 import { PendingSymbolItem } from '../../store/symbol/typings';
 import { symbolService } from '../../services';
@@ -17,6 +19,8 @@ interface SymbolSearchProps {
     pendingSymbols: PendingSymbolItem[];
 
     addPendingSymbol(symbol: PendingSymbolItem): void;
+    searchSymbolFail(): void;
+    addError(error: AppErrorType): void;
 }
 
 const mapStateToProps = (state: AppState) => ({
@@ -24,12 +28,14 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = {
-    addPendingSymbol
+    addPendingSymbol,
+    searchSymbolFail,
+    addError
 };
 
 export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) => {
     const { t } = useTranslation();
-    const { addPendingSymbol, pendingSymbols } = props;
+    const { addPendingSymbol, pendingSymbols, searchSymbolFail, addError } = props;
     const [ searchResult, setSearchResult ] = useState<SearchResult[]>([]);
     const [ pendingSymbol, setPendingSymbol ] = useState<string>('');
     const [ addSymbolMode, setAddSymbolMode ] = useState<boolean>(false);
@@ -39,7 +45,15 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
     const fetchSymbolsList = (e: React.FormEvent<HTMLInputElement>) => {
         if ( e.currentTarget.value.length > 1 ) {
             symbolService.symbolSearch(e.currentTarget.value)
-                .then(res => setSearchResult(symbolsSearchMapper(res)))
+                .then(res => {
+                    if ( res[ 'Note' ] ) {
+                        searchSymbolFail();
+                        addError(AppErrorType.SearchSymbol);
+                        setSearchResult([ { symbol: 'error', description: '' } ]);
+                        return;
+                    }
+                    setSearchResult(symbolsSearchMapper(res))
+                })
         }
     };
 
@@ -68,27 +82,25 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
 
     const getSearchResultList = (): ReactNode => {
         const existPending: string[] = pendingSymbols.reduce<string[]>((acc, item) => acc.concat(item.symbol), []);
-
         return (
             <div className='search-result-list'>
                 {
                     searchResult.map((result: SearchResult): ReactNode => {
-                            const getResultNode = (resultItem: SearchResult): ReactNode =>
-                                (
-                                    <div className='search-result-list__item'
-                                         key={ resultItem.symbol }
-                                         id={ resultItem.symbol }>
-                                        <span onClick={ startEditMode }>{ resultItem.symbol }</span>
-                                        <span onClick={ startEditMode }>  { resultItem.description }</span>
-                                    </div>
-                                );
+                            const getResultNode = (resultItem: SearchResult): ReactNode => (
+                                <div className='search-result-list__item'
+                                     key={ resultItem.symbol }
+                                     id={ resultItem.symbol }>
+                                    <span onClick={ startEditMode }>{ resultItem.symbol }</span>
+                                    <span onClick={ startEditMode }>  { resultItem.description }</span>
+                                </div>
+                            );
 
                             return !existPending.includes(result.symbol.toLowerCase()) && getResultNode(result)
                         }
                     )
                 }
             </div>
-        )
+        );
     };
 
     const searchInput: ReactNode = addSymbolMode
@@ -119,7 +131,7 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
     return (
         <div className='total-row'>
             { searchInput }
-            { (!addSymbolMode && searchResult.length > 0) && getSearchResultList() }
+            { (!addSymbolMode && searchResult[ 0 ]) && getSearchResultList() }
             { addSymbolMode && getSharesBuyNodes('shares') }
             { addSymbolMode && getSharesBuyNodes('buy') }
             { addSymbolMode && totalControls }

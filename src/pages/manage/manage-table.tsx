@@ -13,6 +13,7 @@ import { PendingSymbolItem, PortfolioSymbolItem } from '../../store/symbol/typin
 import { AppState } from '../../store/typings';
 import { footerStyle } from '../inline-styles';
 import { SymbolCell } from './symbol-cell';
+import { symbolService } from '../../services';
 
 import 'react-table/react-table.css';
 import './manage.scss';
@@ -57,6 +58,9 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
             buy: symbol.buy
         }
     });
+    const getPoll = () => symbolService.getSymbolPoll('ssnc', '60min', 30000, 10)
+        .then(res => res)
+        .catch(error => console.log(error));
 
     const config: TableConfig = {
         data: [ ...symbols ],
