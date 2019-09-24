@@ -1,11 +1,14 @@
-import React, { FC, memo } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
 import { SymbolSearch, Table, TableConfig } from '../../components';
 import { deletePendingSymbol, fetchPortfolioSymbol } from '../../store/symbol/actions';
 import {
-    selectPendingSymbols, selectPortfolio,
+    selectPendingSymbols,
+    selectPortfolio,
     selectTotalPendingBuy,
     selectTotalPendingShares
 } from '../../store/symbol/selectors';
@@ -13,54 +16,32 @@ import { PendingSymbolItem, PortfolioSymbolItem } from '../../store/symbol/typin
 import { AppState } from '../../store/typings';
 import { footerStyle } from '../inline-styles';
 import { SymbolCell } from './symbol-cell';
-import { symbolService } from '../../services';
 
 import 'react-table/react-table.css';
 import './manage.scss';
 
-interface ManageTableProps {
-    pendingSymbols: PendingSymbolItem[];
-    portfolioSymbols: PortfolioSymbolItem[];
-    totalPendingShares: string;
-    totalPendingBuy: string;
-
-    fetchPortfolioSymbol(id: string): void;
-    deletePendingSymbol(id: string): void;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    pendingSymbols: selectPendingSymbols(state),
-    portfolioSymbols: selectPortfolio(state),
-    totalPendingShares: selectTotalPendingShares(state),
-    totalPendingBuy: selectTotalPendingBuy(state)
-});
-
-const mapDispatchToProps = { deletePendingSymbol, fetchPortfolioSymbol };
-
-const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
+const ManageTable: FC = () => {
     const { t } = useTranslation();
-    const {
-        pendingSymbols,
-        portfolioSymbols,
-        deletePendingSymbol,
-        totalPendingShares,
-        totalPendingBuy,
-        fetchPortfolioSymbol,
-    } = props;
+    const dispatch = useDispatch<Dispatch>();
+
+    const pendingSymbols = useSelector<AppState, PendingSymbolItem[]>(selectPendingSymbols);
+    const portfolioSymbols = useSelector<AppState, PortfolioSymbolItem[]>(selectPortfolio);
+    const totalPendingShares = useSelector<AppState, string>(selectTotalPendingShares);
+    const totalPendingBuy = useSelector<AppState, string>(selectTotalPendingBuy);
+
+    const deletePending = (id: string) => dispatch({ type: getType(deletePendingSymbol), payload: id });
+    const fetchPortfolioSymbolItem = (id: string) => dispatch({ type: getType(fetchPortfolioSymbol), payload: id });
 
     const symbols = pendingSymbols.map((symbol: PendingSymbolItem) => {
         return {
             symbol: <SymbolCell symbol={ symbol }
                                 portfolioSymbols={ portfolioSymbols }
-                                deletePendingSymbol={ deletePendingSymbol }
-                                fetchSymbol={ fetchPortfolioSymbol }/>,
+                                deletePendingSymbol={ deletePending }
+                                fetchSymbol={ fetchPortfolioSymbolItem }/>,
             shares: symbol.shares,
             buy: symbol.buy
         }
     });
-    const getPoll = () => symbolService.getSymbolPoll('ssnc', '60min', 30000, 10)
-        .then(res => res)
-        .catch(error => console.log(error));
 
     const config: TableConfig = {
         data: [ ...symbols ],
@@ -102,7 +83,4 @@ const ManageTable: FC<ManageTableProps> = (props: ManageTableProps) => {
     )
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(memo(ManageTable));
+export default ManageTable;

@@ -1,6 +1,8 @@
-import React, { memo, FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getType } from 'typesafe-actions';
 
 import { Button, Icon } from '..';
 import { addError } from '../../store/errors/actions';
@@ -15,27 +17,11 @@ import { AppState } from '../../store/typings';
 
 import './symbol-search.scss';
 
-interface SymbolSearchProps {
-    pendingSymbols: PendingSymbolItem[];
-
-    addPendingSymbol(symbol: PendingSymbolItem): void;
-    searchSymbolFail(): void;
-    addError(error: AppErrorType): void;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    pendingSymbols: selectPendingSymbols(state)
-});
-
-const mapDispatchToProps = {
-    addPendingSymbol,
-    searchSymbolFail,
-    addError
-};
-
-export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) => {
+export const SymbolSearch: FC = () => {
     const { t } = useTranslation();
-    const { addPendingSymbol, pendingSymbols, searchSymbolFail, addError } = props;
+    const dispatch = useDispatch<Dispatch>();
+
+    const pendingSymbols = useSelector<AppState, PendingSymbolItem[]>(selectPendingSymbols);
     const [ searchResult, setSearchResult ] = useState<SearchResult[]>([]);
     const [ pendingSymbol, setPendingSymbol ] = useState<string>('');
     const [ addSymbolMode, setAddSymbolMode ] = useState<boolean>(false);
@@ -47,8 +33,8 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
             symbolService.symbolSearch(e.currentTarget.value)
                 .then(res => {
                     if ( res[ 'Note' ] ) {
-                        searchSymbolFail();
-                        addError(AppErrorType.SearchSymbol);
+                        dispatch({ type: getType(searchSymbolFail) });
+                        dispatch({ type: addError, payload: AppErrorType.SearchSymbol });
                         setSearchResult([ { symbol: 'error', description: '' } ]);
                         return;
                     }
@@ -63,7 +49,14 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
     };
 
     const addSymbol = () => {
-        addPendingSymbol({ symbol: pendingSymbol.toLowerCase(), description: '', ...sharesBuy });
+        dispatch({
+            type: getType(addPendingSymbol),
+            payload: {
+                symbol: pendingSymbol.toLowerCase(),
+                description: '',
+                ...sharesBuy
+            }
+        });
         setSearchResult([]);
         setAddSymbolMode(false);
     };
@@ -139,7 +132,4 @@ export const SymbolSearch: FC<SymbolSearchProps> = (props: SymbolSearchProps) =>
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(memo(SymbolSearch));
+export default SymbolSearch;

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import ReactTable, { Column } from 'react-table';
 
 import './table.scss';

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '..';
@@ -11,26 +11,24 @@ import { selectIsPortfolioAvailable } from '../../store/symbol/selectors';
 
 import './nav-bar.scss';
 
-interface NavBarProps {
-    currentPath: string;
-    isPortfolioAvailable: boolean;
-
-    push(path: string): void;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    currentPath: selectCurrentPath(state),
-    isPortfolioAvailable: selectIsPortfolioAvailable(state)
-});
-
-const mapDispatchToProps = { push };
-
-const NavBar: FC<NavBarProps> = (props: NavBarProps) => {
-    const { currentPath, push, isPortfolioAvailable } = props;
+const NavBar: FC = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch<Dispatch>();
 
-    const toManage = () => currentPath !== ROUTES.manage && push(ROUTES.manage);
-    const toMonitor = () => currentPath !== ROUTES.monitor && push(ROUTES.monitor);
+    const currentPath = useSelector<AppState, string>(selectCurrentPath);
+    const isPortfolioAvailable = useSelector<AppState, boolean>(selectIsPortfolioAvailable);
+    const navigate = (pathname: string) => {
+        dispatch({
+            type: '@@router/LOCATION_CHANGE',
+            payload: {
+                location: { pathname: pathname },
+                action:'POP'
+            }
+        });
+    };
+
+    const toManage = () => currentPath !== ROUTES.manage && navigate(ROUTES.manage);
+    const toMonitor = () => currentPath !== ROUTES.monitor && navigate(ROUTES.monitor);
 
     return (
         <div className='nav-bar'>
@@ -47,7 +45,4 @@ const NavBar: FC<NavBarProps> = (props: NavBarProps) => {
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NavBar);
+export default NavBar;

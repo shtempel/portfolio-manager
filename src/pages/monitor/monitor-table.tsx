@@ -1,7 +1,8 @@
-import { push } from 'connected-react-router';
-import React, { memo, FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
 import { Table, TableConfig, Chart } from '../../components';
 import { ROUTES } from '../../routes';
@@ -19,61 +20,53 @@ import { footerStyle } from '../inline-styles';
 import { SymbolCell } from './symbol-cell';
 import { ChartDataState } from './typings';
 
-interface MonitorTableProps {
-    portfolio: PortfolioSymbolItem[];
-    currentTotal: string;
-    portfolioTotalBuy: string;
-    portfolioTotalShares: string;
-    isPortfolioAvailable: boolean;
-
-    push(path: string): void;
-    deletePortfolioSymbol(id: string): void;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    portfolio: selectPortfolio(state),
-    currentTotal: selectPortfolioTotalCurrent(state),
-    portfolioTotalBuy: selectPortfolioTotalBuy(state),
-    portfolioTotalShares: selectPortfolioTotalShares(state),
-    isPortfolioAvailable: selectIsPortfolioAvailable(state)
-});
-
-const mapDispatchToProps = { deletePortfolioSymbol, push };
-
-export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) => {
+const MonitorTable: FC = () => {
     const { t } = useTranslation();
-    const {
-        portfolio,
-        deletePortfolioSymbol,
-        currentTotal,
-        portfolioTotalBuy,
-        portfolioTotalShares,
-        isPortfolioAvailable,
-        push
-    } = props;
+    const dispatch = useDispatch<Dispatch>();
+
+    const portfolio = useSelector<AppState, PortfolioSymbolItem[]>(selectPortfolio);
+    const currentTotal = useSelector<AppState, string>(selectPortfolioTotalCurrent);
+    const portfolioTotalBuy = useSelector<AppState, string>(selectPortfolioTotalBuy);
+    const portfolioTotalShares = useSelector<AppState, string>(selectPortfolioTotalShares);
+    const isPortfolioAvailable = useSelector<AppState, boolean>(selectIsPortfolioAvailable);
+
+    const deleteSymbolFromPortfolio = (id: string): void => {
+        dispatch({
+            type: getType(deletePortfolioSymbol),
+            payload: id
+        })
+    };
+
+    const navigate = (pathname: string) => {
+        dispatch({
+            type: '@@router/LOCATION_CHANGE',
+            payload: {
+                location: { pathname: pathname },
+                action: 'POP'
+            }
+        })
+    };
+
     const initialChartDataState: ChartDataState[] = portfolio.length
-        ? [ {
-            name: portfolio[ 0 ].name,
-            data: portfolio[ 0 ].history
-        } ]
+        ? [ { name: portfolio[ 0 ].name, data: portfolio[ 0 ].history } ]
         : [];
 
-    useEffect(() => { !isPortfolioAvailable && push(ROUTES.manage) });
+    useEffect(() => { !isPortfolioAvailable && navigate(ROUTES.manage) });
     const [ chartData, setChartData ] = useState<ChartDataState[]>(initialChartDataState);
 
     const symbolToChart = (id: string) => {
         const selected = portfolio.filter(item => item.name === id).map(item => ({
             name: item.name,
             data: [ ...item.history ]
-    }));
+        }));
         setChartData(selected);
     };
 
-    const symbols = portfolio.map((symbol: PortfolioSymbolItem) => {
+    const symbols = portfolio.map((symbol: PortfolioSymbolItem): ReactNode => {
         return {
             symbol: <SymbolCell symbol={ symbol }
                                 addSymbolToChart={ symbolToChart }
-                                deletePortfolioSymbol={ deletePortfolioSymbol }/>,
+                                deletePortfolioSymbol={ deleteSymbolFromPortfolio }/>,
             shares: symbol.shares,
             buy: symbol.buy,
             current: symbol.currentValue
@@ -128,7 +121,4 @@ export const MonitorTable: FC<MonitorTableProps> = (props: MonitorTableProps) =>
     )
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(memo(MonitorTable));
+export default MonitorTable;

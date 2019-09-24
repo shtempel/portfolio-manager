@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery, throttle } from 'redux-saga/effects';
-import { LOCATION_CHANGE, push } from "connected-react-router";
+import { LOCATION_CHANGE, push } from 'connected-react-router';
 import { getType } from 'typesafe-actions';
 
 import {

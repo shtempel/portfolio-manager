@@ -11,15 +11,16 @@ interface CustomCellProps {
 }
 
 export const SymbolCell: FC<CustomCellProps> = (props: CustomCellProps) => {
+    const { addSymbolToChart, deletePortfolioSymbol, symbol } = props;
     return (
         <>
-            { props.symbol.name }
+            { symbol.name }
             <div className='buttons-row'>
-                <Button id={ props.symbol.name }
-                        onButtonClick={ (e) => props.addSymbolToChart(e.target.id) }
+                <Button id={ symbol.name }
+                        onButtonClick={ (e) => addSymbolToChart(e.target.id) }
                         icon={ { iconPrefix: 'fas', iconName: 'chart-line' } }/>
                 <Button id={ props.symbol.name }
-                        onButtonClick={ (e) => props.deletePortfolioSymbol(e.target.id) }
+                        onButtonClick={ (e) => deletePortfolioSymbol(e.target.id) }
                         icon={ { iconPrefix: 'fas', iconName: 'trash' } }/>
             </div>
         </>

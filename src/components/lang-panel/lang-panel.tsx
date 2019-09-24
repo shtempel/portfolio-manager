@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
+import { getType } from 'typesafe-actions';
 
 import { AppState } from '../../store/typings';
 import { selectLanguage } from '../../store/language/selectors';
@@ -10,25 +12,15 @@ import { Languages } from '../../services/typings';
 
 import './lang-panel.scss';
 
-interface LangPanelProps {
-    language: string;
-
-    setLanguage(language: string): void;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    language: selectLanguage( state ),
-});
-
-const mapDispatchToProps = { setLanguage };
-
-const LangPanel: FC<LangPanelProps> = (props: LangPanelProps) => {
-    const { language, setLanguage } = props;
+const LangPanel: FC = () => {
     const { t } = useTranslation();
+    const dispatch = useDispatch<Dispatch>();
+
+    const language = useSelector<AppState, string>(selectLanguage);
 
     const changeLanguage = (e: any) => {
         if ( e.target.id !== language ) {
-            setLanguage( e.target.id );
+            dispatch({ type: getType(setLanguage), payload: e.target.id });
             window.location.reload();
         }
     };
@@ -37,15 +29,12 @@ const LangPanel: FC<LangPanelProps> = (props: LangPanelProps) => {
         <div className='lang-panel row'>
             <span id={ Languages.en }
                   onClick={ changeLanguage }
-                  className={ cn( 'not-active', { 'active': language === 'en-US' } ) }>{ t( 'eng' ) }</span>
+                  className={ cn('not-active', { 'active': language === 'en-US' }) }>{ t('eng') }</span>
             <span id={ Languages.ru }
                   onClick={ changeLanguage }
-                  className={ cn( 'not-active', { 'active': language === 'ru-RU' } ) }>{ t( 'rus' ) }</span>
+                  className={ cn('not-active', { 'active': language === 'ru-RU' }) }>{ t('rus') }</span>
         </div>
     );
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)( LangPanel );
+export default LangPanel;

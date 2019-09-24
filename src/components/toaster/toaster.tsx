@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { Icon } from '..';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import { getType } from 'typesafe-actions';
 
+import { Icon } from '..';
 import { deleteAllErrors } from '../../store/errors/actions';
 import { selectLastError } from '../../store/errors/selectors';
 import { AppError } from '../../store/errors/typings';
@@ -10,22 +12,13 @@ import { AppState } from '../../store/typings';
 
 import './toaster.scss';
 
-interface ToasterProps {
-    lastError?: AppError;
 
-    deleteAllErrors(): void;
-}
-
-const mapStateToProps = (state: AppState) => ({
-    lastError: selectLastError(state)
-});
-
-const mapDispatchToProps = { deleteAllErrors };
-
-export const Toaster: FC<ToasterProps> = (props: ToasterProps) => {
-    const { lastError, deleteAllErrors } = props;
+export const Toaster: FC = () => {
     const { t } = useTranslation();
-    const onDeleteClick = () => deleteAllErrors();
+    const dispatch = useDispatch<Dispatch>();
+
+    const lastError = useSelector<AppState, AppError | undefined>(selectLastError);
+    const onDeleteClick = () => dispatch({ type: getType(deleteAllErrors) });
 
     const error = lastError
         ? (
@@ -39,7 +32,5 @@ export const Toaster: FC<ToasterProps> = (props: ToasterProps) => {
     return <>{ error }</>
 
 };
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Toaster);
+
+export default Toaster;

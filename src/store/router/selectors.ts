@@ -8,7 +8,7 @@ const slice = (state: AppState) => state.router;
 
 export const selectCurrentPath = createSelector(
     [ slice ],
-    localization => localization.location.pathname
+    pathName => pathName.location.pathname
 );
 
 export const selectRouterSavedState = createSelector(
